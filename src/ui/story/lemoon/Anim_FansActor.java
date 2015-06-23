@@ -52,7 +52,7 @@ public class Anim_FansActor extends Actor{
 	int mUheight, mUWidth;
 	int mUnitSize = 32;
 	float xorg ,yorg;
-	public Anim_FansActor() {
+	public Anim_FansActor(Texture t) {
 		// TODO Auto-generated constructor stub
 		super();
 		
@@ -76,7 +76,8 @@ public class Anim_FansActor extends Actor{
 		yorg = (mUheight-0)/2f;		
 		
 
-		texture = new Texture(Gdx.files.internal("anims/fan.png"));
+		//texture = new Texture(Gdx.files.internal("anims/fan.png"));
+		texture = t;
 		mTextureRegion = new TextureRegion(texture, mUWidth*mUnitSize, mUheight*mUnitSize);  //这儿必须是基于像素的，取所需图像的像素尺寸
 
 		//关于设置边界这儿
@@ -128,6 +129,6 @@ public class Anim_FansActor extends Actor{
 		// TODO Auto-generated method stub
 		super.clear();
 		
-		texture.dispose();
+		//texture.dispose();
 	}
 }

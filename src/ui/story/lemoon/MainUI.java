@@ -69,9 +69,9 @@ public class MainUI extends ApplicationAdapter implements GestureListener {
 		viewport = new StretchViewport(WIDTH, HEIGHT, mCamera);
 		mStage = new Stage(viewport);
 
-		mFan = new Anim_FansActor();
-		mRipper = new Anim_RippleActor();
-		mFlow = new Anim_FlowActor();
+//		mFan = new Anim_FansActor();
+//		mRipper = new Anim_RippleActor();
+//		mFlow = new Anim_FlowActor();
 
 		mStage.addActor(mFan);
 		mStage.addActor(mRipper);

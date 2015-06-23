@@ -21,10 +21,11 @@ public class Anim_RippleActor extends Actor {
 	float mUheight = 2;
 	
 	TextureRegion currentFrame;
-	public Anim_RippleActor() {
+	public Anim_RippleActor(Texture t) {
 		// TODO Auto-generated constructor stub
 		//super();
-		texture = new Texture("anims/ripple.png");
+		//texture = new Texture("anims/ripple.png");
+		texture = t;
 		region = new TextureRegion(texture);
 		
 		//(39, 21)
@@ -64,7 +65,7 @@ public class Anim_RippleActor extends Actor {
 	public void clear() {
 		// TODO Auto-generated method stub
 		
-		texture.dispose();
+		//texture.dispose();
 		super.clear();
 	}
 }

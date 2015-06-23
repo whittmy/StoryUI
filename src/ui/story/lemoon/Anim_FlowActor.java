@@ -33,16 +33,19 @@ public class Anim_FlowActor extends Actor {
 	float mUheight = 2;
 	TextureRegion currentFrame;
 	float mMinDelay = 0f;
-	public Anim_FlowActor() {
+	public Anim_FlowActor(Texture t, BitmapFont f) {
 		// TODO Auto-generated constructor stub
-		texture = new Texture("anims/flow.png");
+		//texture = new Texture("anims/flow.png");
+		texture = t;
 		region = new TextureRegion(texture);
 		
 		//(37, 20)
 		actorX = 37;
 		actorY = 32-20-1;
 		
-		font = new BitmapFont(Gdx.files.internal("font/arial-15.fnt"), Gdx.files.internal("font/arial-15.png"), false);
+		//font = new BitmapFont(Gdx.files.internal("font/arial-15.fnt"), Gdx.files.internal("font/arial-15.png"), false);
+		font = f;
+		
 		font.setColor(255, 255, 255, 1);
 		font.getData().setScale(0.075f, 0.06f);
 		//font.getData().setScale(0.05f);
@@ -112,9 +115,9 @@ public class Anim_FlowActor extends Actor {
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		font.dispose();
+		//font.dispose();
 
-		texture.dispose();
+		//texture.dispose();
 		super.clear();
 	}
 }
