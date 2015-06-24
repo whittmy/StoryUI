@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 // 水波纹动画
-public class Anim_RippleActor extends Actor {
+public class nouse_Anim_RippleActor extends Actor {
 	Texture texture;
 	TextureRegion region;
 	Animation mRippleAnim;
@@ -21,16 +21,16 @@ public class Anim_RippleActor extends Actor {
 	float mUheight = 2;
 	
 	TextureRegion currentFrame;
-	public Anim_RippleActor(Texture t) {
+	public nouse_Anim_RippleActor(Texture t) {
 		// TODO Auto-generated constructor stub
 		//super();
 		//texture = new Texture("anims/ripple.png");
 		texture = t;
 		region = new TextureRegion(texture);
 		
-		//(39, 21)
-		actorX = 39;
-		actorY = 32-21-1;
+		//(36, 20)
+		actorX = 36;
+		actorY = 30-20-1;
 		
 		TextureRegion[][] tmp = region.split(texture.getWidth(), texture.getHeight()/3);
 		mRippleFrams = new TextureRegion[3];

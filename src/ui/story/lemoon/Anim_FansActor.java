@@ -3,6 +3,7 @@ package ui.story.lemoon;
 import sun.java2d.pipe.TextRenderer;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -46,21 +47,27 @@ public class Anim_FansActor extends Actor{
 	TextureRegion mTextureRegion;
 	
 	/// 整个地图的尺寸 
-	int mMapWidth = 56;
-	int mMapHeight = 32;
+	int mMapWidth = 50;
+	int mMapHeight = 30;
 	
 	int mUheight, mUWidth;
 	int mUnitSize = 32;
 	float xorg ,yorg;
-	public Anim_FansActor(Texture t) {
+	public Anim_FansActor() {
 		// TODO Auto-generated constructor stub
 		super();
 		
+		AssetManager mgr = MyGame.getManager();
+		if (mgr.isLoaded("anims/fan.png")){
+			Gdx.app.log("", "fan loaded");
+			texture =  mgr.get("anims/fan.png", Texture.class);
+		}
+		
 		// actorX/actorY为libGDX坐标系统上（原点左下角），风车所在的位置(actorX, actorY)，该点位风车图片的左下角位置。
-		// 但是TileMapEditor中查看位置，其坐标是相对于 右上角的，如风车图片左下 角的坐标为(33, 18)
+		// 但是TileMapEditor中查看位置，其坐标是相对于 右上角的，如风车图片左下 角的坐标为(30, 17)
 		// 地图=>libgdx，坐标转换的方式如下：
-		actorX = 33f; 
-		actorY = (mMapHeight-18-1);
+		actorX = 30f; 
+		actorY = (mMapHeight-17-1);
 		
 		
 		/// 风车的尺寸为 3*3units
@@ -76,8 +83,7 @@ public class Anim_FansActor extends Actor{
 		yorg = (mUheight-0)/2f;		
 		
 
-		//texture = new Texture(Gdx.files.internal("anims/fan.png"));
-		texture = t;
+ 
 		mTextureRegion = new TextureRegion(texture, mUWidth*mUnitSize, mUheight*mUnitSize);  //这儿必须是基于像素的，取所需图像的像素尺寸
 
 		//关于设置边界这儿

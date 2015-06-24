@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 //方法二：是否集成Sprite已无关紧要，因为这个类自己手动去调用draw函数，然后自己实现绘制纹理，每次按不同的旋转度
 
-public class Anim_WindMill {
+public class nouse_Anim_WindMill {
 	private float mRot = 0f;
 
 	//方法一
@@ -21,7 +21,7 @@ public class Anim_WindMill {
 	Texture mTexture;
 	TextureRegion mRegion;
 	
-	public Anim_WindMill(){
+	public nouse_Anim_WindMill(){
 		//方法二
 		 mTexture = new Texture(Gdx.files.internal("anims/fan.png"));
 		 mRegion = new TextureRegion(mTexture,8,8);

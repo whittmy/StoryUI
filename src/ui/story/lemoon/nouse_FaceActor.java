@@ -11,11 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public class FaceActor extends Actor {
+public class nouse_FaceActor extends Actor {
 	
 	private  Texture mTexture;
 	Sprite sprite;
-	public FaceActor(){
+	public nouse_FaceActor(){
 		mTexture = new Texture(Gdx.files.internal("anims/fan.png"));
 		sprite = new Sprite(mTexture);
 		TextureRegion region = new TextureRegion(mTexture); 

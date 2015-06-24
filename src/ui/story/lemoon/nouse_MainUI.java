@@ -26,14 +26,14 @@ import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class MainUI extends ApplicationAdapter implements GestureListener {
+public class nouse_MainUI extends ApplicationAdapter implements GestureListener {
 	public BsuEvent bevent = null;		//用于通知desktop或android等其他平台执行某些操作
 	
 	
-	FaceActor mFace;
+	nouse_FaceActor mFace;
 	Anim_FansActor mFan;
-	Anim_RippleActor mRipper;
-	Anim_FlowActor mFlow;
+	nouse_Anim_RippleActor mRipper;
+	Anim_MiscActor mFlow;
 
 	
 	
@@ -49,7 +49,7 @@ public class MainUI extends ApplicationAdapter implements GestureListener {
 	TiledMap mMap;
 	Viewport viewport;
 
-	public MainUI(BsuEvent be){
+	public nouse_MainUI(BsuEvent be){
 		bevent = be;
 		//bevent.notify(this, "test");
 	}
