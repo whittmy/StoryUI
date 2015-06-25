@@ -3,9 +3,10 @@ package ui.story.lemoon.scr;
 import sun.applet.Main;
 import ui.story.lemoon.Anim_FansActor;
 import ui.story.lemoon.Anim_MiscActor;
-import ui.story.lemoon.nouse_Anim_RippleActor;
-import ui.story.lemoon.nouse_FaceActor;
 import ui.story.lemoon.MyGame;
+import ui.story.lemoon.msg.MyMsg;
+import ui.story.lemoon.nouse.nouse_Anim_RippleActor;
+import ui.story.lemoon.nouse.nouse_FaceActor;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -23,25 +24,19 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Main1Src implements Screen, GestureListener {
-	Game game;
-	
-	
-	
-	nouse_FaceActor mFace;
-   
-	
+	MyGame game;
 	int mCurPg = 0;
-	
-	
-//	private int WIDTH = 56;
-//	private int HEIGHT = 32;
-	private int WIDTH = 50;
-	private int HEIGHT = 30;	
+
+	private int MAP_WIDTH = 50;
+	private int MAP_HEIGHT = 30;	
 
 	private Stage mStage0, mStage1, mStage2;
 	private OrthographicCamera mCamera;
@@ -50,15 +45,205 @@ public class Main1Src implements Screen, GestureListener {
 	Viewport viewport;	
 	
 	InputMultiplexer multiplexer = new InputMultiplexer();
-	public Main1Src(){
-		//game = g;
+	
+ 
+	class GuoXueActor extends Actor{
+		public GuoXueActor(){
+			setBounds(28, MAP_HEIGHT-20-1, 4, 2);
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "GuoXue down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_GUOXUE;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});
+		}
 	}
+	
+	class LifeActor extends Actor{
+		public LifeActor(){
+			setBounds(16, MAP_HEIGHT-20-1, 4, 4); //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Life down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_LIFE;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});			
+		}
+	}
+	
+	class ScienceActor extends Actor{
+		public ScienceActor(){
+			setBounds(26, MAP_HEIGHT-18-1, 3, 4); //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Science down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_SCIENCE;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});	
+		}
+	}
+	
+	class CartonActor extends Actor{
+		public CartonActor(){
+			setBounds(21, MAP_HEIGHT-16-1, 4, 3);  //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Carton down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_CARTON;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});	
+		}
+	}
+	
+	
+	//-------------
+	class MusicActor extends Actor{
+		public MusicActor(){
+			setBounds(16, MAP_HEIGHT-20-1, 3, 4); //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Music down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_MUSIC;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});	
+		}
+	}
+	
+	class PaintActor extends Actor{
+		public PaintActor(){
+			setBounds(21, MAP_HEIGHT-16-1, 4, 4); //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Paint down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_PAINT;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});	
+		}
+	}
+	
+	class MathActor extends Actor{
+		public MathActor(){
+			setBounds(28, MAP_HEIGHT-16-1, 4, 2); //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Math down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_MATHS;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});	
+		}
+	}
+	
+	class LanguageActor extends Actor{
+		public LanguageActor(){
+			setBounds(28, MAP_HEIGHT-21-1, 4, 4); //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Language down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_LANGUAGE;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});	
+		}
+	}	
+	
+	//--------
+	class LocalActor extends Actor{
+		public LocalActor(){
+			setBounds(27, MAP_HEIGHT-20-1, 5, 5); //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Local down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_LOCAL;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});	
+		}
+	}
+	
+	class SettingActor extends Actor{
+		public SettingActor(){
+			setBounds(16, MAP_HEIGHT-20-1, 4, 2); //这个很重要，集成Actor后，如果不设置边界，可能无法被touch或点击
+			addListener(new InputListener(){
+				@Override
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					// TODO Auto-generated method stub
+					//Gdx.app.log("", "Setting down x="+x+", y="+y);
+					MyMsg msg = new MyMsg();
+					msg.what = MyMsg.ITEM_SETTING;
+					game.notify(msg);
+					//return super.touchDown(event, x, y, pointer, button);
+					return true;
+				}
+			});	
+		}
+	}	
+	
+	
+	
+	public Main1Src(Game g){
+		game = (MyGame)g;
+	}
+	
+	
+	GestureDetector mGesture;
 	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		mCamera = new OrthographicCamera(WIDTH, HEIGHT);
-		mCamera.position.set((WIDTH) / 2f+1, HEIGHT / 2f-1, 0); 
+		mCamera = new OrthographicCamera(MAP_WIDTH, MAP_HEIGHT);
+		mCamera.position.set((MAP_WIDTH) / 2f+1, MAP_HEIGHT / 2f-1, 0); 
 		// mCamera.position.x += 250;
 		mCamera.zoom = 1f;
 		mCamera.update();
@@ -75,33 +260,47 @@ public class Main1Src implements Screen, GestureListener {
 		mMap = mgr.get("map/map3.tmx", TiledMap.class);
 		mMapRenderer = new OrthogonalTiledMapRenderer(mMap, 1 / 32f);
 
-		viewport = new StretchViewport(WIDTH, HEIGHT, mCamera);
+		viewport = new StretchViewport(MAP_WIDTH, MAP_HEIGHT, mCamera);
 		mStage0 = new Stage(viewport);
 		mStage1 = new Stage(viewport);
 		mStage2 = new Stage(viewport);
  
-		
 		mStage0.addActor(new Anim_FansActor());
-		
-		
- 		mStage0.addActor(new Anim_MiscActor());
-		mStage1.addActor(new Anim_MiscActor());
-		mStage2.addActor(new Anim_MiscActor());			
- 
-	
-		
-		
-		multiplexer.addProcessor(new GestureDetector(this));
+		mStage0.addActor(new Anim_MiscActor());
+		mStage0.addActor(new GuoXueActor());
+		mStage0.addActor(new LifeActor());
+		mStage0.addActor(new ScienceActor());
+		mStage0.addActor(new CartonActor());
 
-//		InputMultiplexer multiplexer = new InputMultiplexer();
-//		multiplexer.addProcessor(new GestureDetector(this));
-//		multiplexer.addProcessor(mStage0);
-//		Gdx.input.setInputProcessor(multiplexer);
+
+		mStage1.addActor(new Anim_MiscActor());
+		mStage1.addActor(new MusicActor());
+		mStage1.addActor(new PaintActor());
+		mStage1.addActor(new MathActor());
+		mStage1.addActor(new LanguageActor());
+		
+		
+		mStage2.addActor(new Anim_MiscActor());	
+		mStage2.addActor(new LocalActor());
+		mStage2.addActor(new SettingActor());
+ 
+		
+		mGesture = new GestureDetector(this);
+		//multiplexer.addProcessor(mStage0);
+		//multiplexer.addProcessor);
+		//Gdx.input.setInputProcessor(multiplexer);
 	}
 
  
+	boolean mbSetStage = true;
 	//重置舞台监听
 	public void setStage() {
+		if(!mbSetStage)
+			return;
+		Gdx.app.log("", "!!!!setStage");
+		multiplexer.clear();
+		multiplexer.addProcessor(mGesture);
+		
 		switch(mCurPg){
 		case 0:
 			multiplexer.addProcessor(mStage0);
@@ -115,6 +314,7 @@ public class Main1Src implements Screen, GestureListener {
 		}
  
 		Gdx.input.setInputProcessor(multiplexer);
+		mbSetStage = false;
 	}
 	
 	//重置舞台绘制
@@ -206,12 +406,14 @@ public class Main1Src implements Screen, GestureListener {
 		mStage0.dispose();
 		mStage1.dispose();
 		mStage2.dispose();
+		
+		MyGame.getManager().dispose();
 	}
 
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
 		// TODO Auto-generated method stub
-		Gdx.app.log("", "touchDown");
+		//Gdx.app.log("", "touchDown");
 		return false;
 	}
 
@@ -222,16 +424,16 @@ public class Main1Src implements Screen, GestureListener {
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		// TODO Auto-generated method stub
-		Gdx.app.log("", String.format("tap x=%f,y=%f,count=%d",x,y,count));
+		//Gdx.app.log("", String.format("tap x=%f,y=%f,count=%d",x,y,count));
 		
 //		int w = Gdx.graphics.getWidth();
 //		int h = Gdx.graphics.getHeight();
 //		
 //		//x,y方向各个方向可供移动的unit单位。
-//		int canmvunitX = (int)(WIDTH - w/32)/2;
-//		int canmvunitY = (int)(HEIGHT-h/32)/2;
-//		int centerunitX = (int) WIDTH/2;
-//		int centerunitY = (int)HEIGHT/2;
+//		int canmvunitX = (int)(MAP_WIDTH - w/32)/2;
+//		int canmvunitY = (int)(MAP_HEIGHT-h/32)/2;
+//		int centerunitX = (int) MAP_WIDTH/2;
+//		int centerunitY = (int)MAP_HEIGHT/2;
 //		
 //		
 //		//获得点击处到中心点的像素偏移，可能正负
@@ -296,7 +498,7 @@ public class Main1Src implements Screen, GestureListener {
 		// TODO Auto-generated method stub
 		Gdx.app.log("", String.format("fling x=%f,y=%f",velocityX,velocityY));
 		
-		if(velocityX>1500){
+		if(velocityX>1000){
 			if(mCurPg-1 < 0){
 				mCurPg = 2;
 			}
@@ -304,16 +506,20 @@ public class Main1Src implements Screen, GestureListener {
 				mCurPg--;
 			}
 			
+			mbSetStage = true;
 
 			Gdx.app.log("", "change1 mCurpg="+mCurPg);
 		}
-		else if(velocityX < -1500){
+		else if(velocityX < -1000){
 			if(mCurPg+1 > 2){
 				mCurPg = 0;
 			}
 			else{
 				mCurPg++;
 			}
+			
+			mbSetStage = true;
+
 			Gdx.app.log("", "change2 mCurpg="+mCurPg);
 		}
 		
@@ -337,10 +543,10 @@ public class Main1Src implements Screen, GestureListener {
 //		int h = Gdx.graphics.getHeight();
 //		
 //		//x,y方向各个方向可供移动的unit单位。
-//		int canmvunitX = (int)(WIDTH - w/32)/2;
-//		int canmvunitY = (int)(HEIGHT-h/32)/2;
-//		int centerunitX = (int) WIDTH/2;
-//		int centerunitY = (int)HEIGHT/2;		
+//		int canmvunitX = (int)(MAP_WIDTH - w/32)/2;
+//		int canmvunitY = (int)(MAP_HEIGHT-h/32)/2;
+//		int centerunitX = (int) MAP_WIDTH/2;
+//		int centerunitY = (int)MAP_HEIGHT/2;		
 //		
 //		mMvStepsY = mMvStepsX = 0;
 //		
@@ -456,7 +662,7 @@ public class Main1Src implements Screen, GestureListener {
 				mbfirst = false;
 			}	
 			else{
-				Gdx.app.log("", "anim_toDefault: zoom="+mCamera.zoom);
+				//Gdx.app.log("", "anim_toDefault: zoom="+mCamera.zoom);
 				mCamera.zoom -= 0.01f;
 				mCamera.update();	
 			}
@@ -466,7 +672,7 @@ public class Main1Src implements Screen, GestureListener {
 	}
 	
 	private void resetView(){
-		mCamera.position.set((WIDTH) / 2f+2, HEIGHT / 2f-1, 0); // 设置相机居中
+		mCamera.position.set((MAP_WIDTH) / 2f+1, MAP_HEIGHT / 2f-1, 0); // 设置相机居中
 		mCamera.zoom = 0.55f;
 		//mCamera.translate(1, -1);
 		mCamera.update();

@@ -52,7 +52,7 @@ public class LoadingScr implements Screen {
 		if(MyGame.getManager().update()){
 			//加载完毕
 			Gdx.app.log("", "load finished!!");
-			game.setScreen(new Main1Src());
+			game.setScreen(new Main1Src(game));
 		}
 		else{
 			

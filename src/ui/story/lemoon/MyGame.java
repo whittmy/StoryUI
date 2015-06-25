@@ -1,5 +1,6 @@
 package ui.story.lemoon;
 
+import ui.story.lemoon.msg.MyMsg;
 import ui.story.lemoon.scr.LoadingScr;
 
 import com.badlogic.gdx.Game;
@@ -11,8 +12,8 @@ public class MyGame extends Game {
 		mBEvent = b;
 	}
 	
-	public void notify(Object o, String msg){
-		mBEvent.notify(o, msg);
+	public void notify(MyMsg msg){
+		mBEvent.notify(msg);
 	}
 	
 	@Override

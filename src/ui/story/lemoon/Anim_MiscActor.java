@@ -22,6 +22,10 @@ public class Anim_MiscActor extends Actor {
 	int mMapWidth = 50;
 	int mMapHeight = 30;
 	
+	//
+	boolean bfirst = true;
+	
+	
 	//flow
 	TextureRegion mRTxFlow;
 	Texture mTxFlow;
@@ -80,8 +84,9 @@ public class Anim_MiscActor extends Actor {
 		}			
 		if (mgr.isLoaded("font/arial-15.fnt")){
 			font = mgr.get("font/arial-15.fnt", BitmapFont.class);
-			font.setColor(255, 255, 255, 1);
-			font.getData().setScale(0.075f, 0.06f);
+			font.setColor(255, 0, 0, 1);
+			//font.getData().setScale(0.075f, 0.06f);
+			font.getData().setScale(0.05f, 0.05f);
 			font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		}
 		
@@ -141,6 +146,13 @@ public class Anim_MiscActor extends Actor {
 		drawTimeRela(batch);
 	}
 	
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		super.clear();
+	}
+	
+ 
 	//绘制水纹
 	private void drawRipple(Batch batch){
 		batch.draw(mRippleAnim.getKeyFrame(stateTime_Flow, true), 
@@ -177,7 +189,7 @@ public class Anim_MiscActor extends Actor {
 	private void drawTimeRela(Batch batch) {
 		stateTime_Time += Gdx.graphics.getDeltaTime();
 		//每1秒执行下面一次
-		if(stateTime_Time>1f){
+		if(stateTime_Time-0.9f<=0 || bfirst){
 			//获取系统时间 
 			Date curDate = new Date(System.currentTimeMillis());
 			mTimeStr = " "+formatter.format(curDate);
@@ -198,10 +210,12 @@ public class Anim_MiscActor extends Actor {
 			
 			//清零，为了下一秒
 			stateTime_Time = 0f;
+			
+			bfirst = false;
 		}
 		
 		//显示时间
-		font.draw(batch, mTimeStr, 37, 19);
+		font.draw(batch, mTimeStr, 30.5f, 18); //width-12
  
 		//debug
 		//Gdx.app.log("", String.format("rth=%f, rtm=%f", mRotatHour, mRotatMin));
@@ -224,9 +238,5 @@ public class Anim_MiscActor extends Actor {
 	}
 	
 	
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		super.clear();
-	}
+
 }

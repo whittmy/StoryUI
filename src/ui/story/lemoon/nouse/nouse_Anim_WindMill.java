@@ -1,4 +1,4 @@
-package ui.story.lemoon;
+package ui.story.lemoon.nouse;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
