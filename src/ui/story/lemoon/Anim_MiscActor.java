@@ -185,19 +185,33 @@ public class Anim_MiscActor extends Actor {
 	float mRotatSec= 0;		// x/60f * 360f
 	
 	float test = 0f;
+	
+	
+	 
+	Date mCurDate = new Date();
+	int h=0, m=0, s=0;
 	//(37, 13) => (37, (32-13))==(37, 19)
 	private void drawTimeRela(Batch batch) {
 		stateTime_Time += Gdx.graphics.getDeltaTime();
 		//每1秒执行下面一次
 		if(stateTime_Time-0.9f<=0 || bfirst){
 			//获取系统时间 
-			Date curDate = new Date(System.currentTimeMillis());
-			mTimeStr = " "+formatter.format(curDate);
+			//mCurDate = new Date();
+			mCurDate.setTime(System.currentTimeMillis());
+			mTimeStr = " "+formatter.format(mCurDate);
  
+			//mCurDate.getDate(); //1-31
+			h = mCurDate.getHours();//
+			m = mCurDate.getMinutes();
+			s = mCurDate.getSeconds();
 			// 计算时钟各指针旋转角度>>>
-			int h = Integer.valueOf(formatter_H.format(curDate));
-			int m = Integer.valueOf(formatter_M.format(curDate));
-			int s = Integer.valueOf(formatter_S.format(curDate));
+//			String strH = ;
+//			String strM = ;
+//			String strS = ;
+			//h = Integer.valueOf(formatter_H.format(mCurDate));
+			//m = Integer.valueOf(formatter_M.format(mCurDate));
+			//s = Integer.valueOf(formatter_S.format(mCurDate));
+ 
 			if(h > 12) h -= 12;
 
 			mRotatHour = 360f * h/12f;
@@ -210,7 +224,7 @@ public class Anim_MiscActor extends Actor {
 			
 			//清零，为了下一秒
 			stateTime_Time = 0f;
-			
+ 
 			bfirst = false;
 		}
 		
