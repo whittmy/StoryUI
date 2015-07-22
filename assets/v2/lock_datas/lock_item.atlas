@@ -1,0 +1,55 @@
+
+lock_item.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bg
+  rotate: false
+  xy: 2, 247
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+boat1
+  rotate: false
+  xy: 2, 85
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+boat2
+  rotate: false
+  xy: 804, 567
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+hand
+  rotate: false
+  xy: 804, 484
+  size: 55, 81
+  orig: 55, 81
+  offset: 0, 0
+  index: -1
+unlock
+  rotate: false
+  xy: 2, 2
+  size: 148, 81
+  orig: 148, 81
+  offset: 0, 0
+  index: -1
+wave1
+  rotate: false
+  xy: 371, 181
+  size: 198, 64
+  orig: 198, 64
+  offset: 0, 0
+  index: -1
+wave2
+  rotate: false
+  xy: 164, 135
+  size: 205, 110
+  orig: 205, 110
+  offset: 0, 0
+  index: -1

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
  
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -73,6 +74,7 @@ public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.e("", "------AndroidLauncher onCreate");
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;
 	    config.useCompass = false;
@@ -102,7 +104,7 @@ public class AndroidLauncher extends AndroidApplication {
 					it.setComponent(com);  
 					
 					it.putExtra("curCata", "国学教育");
-					it.putExtra("cataId", 10000009);				
+					it.putExtra("cataId", 2);				
 					
 					startActivity(it);
 					break;
@@ -112,7 +114,8 @@ public class AndroidLauncher extends AndroidApplication {
 					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
 					it.setComponent(com); 
 					it.putExtra("curCata",  "动画城");
-					it.putExtra("cataId", 10000009);
+					it.putExtra("cataId", 1);
+					startActivity(it);
 					break;
 				case MyMsg.ITEM_LANGUAGE:
 					System.out.println("LANGUAGE");
@@ -120,7 +123,7 @@ public class AndroidLauncher extends AndroidApplication {
 					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
 					it.setComponent(com); 
 					it.putExtra("curCata",  "语言发展");
-					it.putExtra("cataId", 10000009);				
+					it.putExtra("cataId", 5);				
 					
 					startActivity(it);	
 					break;
@@ -130,7 +133,7 @@ public class AndroidLauncher extends AndroidApplication {
 					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
 					it.setComponent(com); 
 					it.putExtra("curCata",  "生活常识");
-					it.putExtra("cataId", 10000009);				
+					it.putExtra("cataId", 3);				
 					
 					startActivity(it);
 					break;
@@ -139,23 +142,23 @@ public class AndroidLauncher extends AndroidApplication {
 					break;
 				case MyMsg.ITEM_MATHS:
 					System.out.println("MATHS");
-					it = new Intent();
-					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
-					it.setComponent(com); 
-					it.putExtra("curCata",  "数理思维");
-					it.putExtra("cataId", 10000009);				
-					
-					startActivity(it);		
+//					it = new Intent();
+//					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
+//					it.setComponent(com); 
+//					it.putExtra("curCata",  "数理思维");
+//					it.putExtra("cataId", 6);				
+//					
+//					startActivity(it);		
 					break;
 				case MyMsg.ITEM_MUSIC:
 					System.out.println("MUSIC");
-					it = new Intent();
-					com= new ComponentName("children.lemoon", "children.lemoon.music.MuPlayer");  
-					it.setComponent(com); 
- 
-					it.putExtra("curCata",  "网络音乐测试");
-					it.putExtra("cataId", 100);
-					startActivity(it);
+//					it = new Intent();
+//					com= new ComponentName("children.lemoon", "children.lemoon.music.MuPlayer");  
+//					it.setComponent(com); 
+// 
+//					it.putExtra("curCata",  "网络音乐测试");
+//					it.putExtra("cataId", 100);
+//					startActivity(it);
 					
 					
 					break;
@@ -168,7 +171,7 @@ public class AndroidLauncher extends AndroidApplication {
 					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
 					it.setComponent(com); 
 					it.putExtra("curCata",  "自然科学");
-					it.putExtra("cataId", 10000009);				
+					it.putExtra("cataId", 4);				
 					
 					startActivity(it);	
 					break;
@@ -184,6 +187,7 @@ public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
+		Log.e("", "------AndroidLauncher onPause");
         try {
             unregisterReceiver(batteryReceiver);
         }
@@ -200,6 +204,7 @@ public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
+		Log.e("", "------AndroidLauncher onResume");
 		IntentFilter filter = new IntentFilter("android.intent.action.BATTERY_CHANGED");
 		registerReceiver(batteryReceiver, filter);
 		
@@ -212,7 +217,17 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		
-		System.exit(0);
+		Log.e("", "------AndroidLauncher onStop");
+		//System.exit(0);
 	}
+	
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		Log.e("", "------AndroidLauncher onDestroy");
+	}
+	
+	//ACTION_SCREEN_OFF and ACTION_SCREEN_ON 
 }
