@@ -1,8 +1,13 @@
 package ui.story.lemoon.actor;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import ui.story.lemoon.Configer;
+import ui.story.lemoon.actor.LifeActor.MyTask;
 import ui.story.lemoon.msg.MyMsg;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -19,7 +24,7 @@ public class GuoXueActor extends Actor{
 	
 	boolean mbHadGrowed = false;
 	Configer mCfg;
-	
+	Timer mTimer = null;
 	public GuoXueActor(Configer cfg){
 		super();
 		mCfg = cfg;
@@ -32,16 +37,48 @@ public class GuoXueActor extends Actor{
 		setBounds(mPosx, mPosy, mW, mH);
 		addListener(new InputListener(){
 			@Override
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				// TODO Auto-generated method stub
+				//Gdx.app.log("", "GuoXue up x="+x+", y="+y);
+				//return super.touchDown(event, x, y, pointer, button);
+				//return true;
+			}
+ 
+			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				// TODO Auto-generated method stub
-				//Gdx.app.log("", "GuoXue down x="+x+", y="+y);
+				Gdx.app.log("", "GuoXue down x="+x+", y="+y);
+				if(mTimer != null){
+					mTimer.cancel();
+					mTimer = null;
+				}
+				
+				mTimer = new Timer(true);
+				MyTask task = new MyTask();
+				mTimer.schedule(task  ,400);
+				
+				return false; 
+			}
+
+		});
+	}
+	
+	class MyTask extends TimerTask{
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			long intval = (System.currentTimeMillis()- mCfg.mLastSwitchSrc_time);
+			Gdx.app.log("", "intval="+intval);
+			if( intval>=400){
 				MyMsg msg = new MyMsg();
 				msg.what = MyMsg.ITEM_GUOXUE;
 				mCfg.game.notify(msg);
-				//return super.touchDown(event, x, y, pointer, button);
-				return true;
+				Gdx.app.log("", "actor touched activate");
 			}
-		});
+			
+			mTimer.cancel();
+			mTimer = null;
+		}
 	}
 	
 	void checkShow(){

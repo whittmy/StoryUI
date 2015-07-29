@@ -3,6 +3,7 @@ package ui.story.lemoon.scr.v2;
 import java.util.HashMap;
 
 import ui.story.lemoon.Configer;
+import ui.story.lemoon.Configer.BgMusicListener;
 import ui.story.lemoon.MyGame;
 import ui.story.lemoon.actor.*;
 
@@ -58,12 +59,40 @@ public class SCRMain implements Screen, GestureListener {
 	AtlasRegion mbottomCloud;
 	float mcloudOffsetX,mcloudOffsetY, mCloudW,mCloud2W;
 	
-	Music night_music;
+	Music night_music,day_music;
 	
 	public SCRMain(Game g){
+		//Gdx.graphics.setContinuousRendering(false);
+
+		
 		Gdx.app.log("", "------------SCRMain.SCRMain");
 		mCfg = new Configer();
 		mCfg.game = (MyGame)g;
+		
+		mCfg.setBgMusicListener(new BgMusicListener() {
+			@Override
+			public void toggleMusic(boolean on) {
+				// TODO Auto-generated method stub
+				if(on){
+					if(mCfg.mBDayMode){
+						day_music.play();
+					}
+					else{
+						night_music.play();
+					}
+					
+				}
+				else{
+					if(mCfg.mBDayMode){
+						day_music.pause();
+					}
+					else{
+						night_music.pause();
+					}
+					
+				}
+			}
+		});
 	}
 	
 	
@@ -73,6 +102,7 @@ public class SCRMain implements Screen, GestureListener {
 	public void show() {
 		// TODO Auto-generated method stub
 		Gdx.app.log("", "------------SCRMain.show");
+		//Gdx.graphics.setContinuousRendering(false);
 		initRes();
 		initStageItems();
 		
@@ -84,6 +114,7 @@ public class SCRMain implements Screen, GestureListener {
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 				// TODO Auto-generated method stub
+				Gdx.app.log("", "InputProcessor. touchup");
 				return false;
 			}
 			
@@ -96,6 +127,7 @@ public class SCRMain implements Screen, GestureListener {
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 				// TODO Auto-generated method stub
+				Gdx.app.log("", "InputProcessor. touchDown");
 				return false;
 			}
 			
@@ -188,6 +220,8 @@ public class SCRMain implements Screen, GestureListener {
 		viewport = new StretchViewport(mCfg.MAP_WIDTH, mCfg.MAP_HEIGHT, mCamera);
 		mStage1 = new Stage(viewport);
 		
+		mStage1.addActor(new MeteorActor(mCfg, 26f,19f, 30f, 0f));
+		mStage1.addActor(new MeteorActor(mCfg, 35f,22f, 30f, 2f));
 		
 		mStage1.addActor(new RainBowActor(mCfg));
 		
@@ -225,7 +259,8 @@ public class SCRMain implements Screen, GestureListener {
 		
 		
         mStage1.addActor(new LogoActor(mCfg));
-
+        
+        mStage1.addActor(new SpeakerActor(mCfg));
 	}
  
 	
@@ -260,9 +295,14 @@ public class SCRMain implements Screen, GestureListener {
 			mCfg.font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		}
 		
+		
+		day_music = Gdx.audio.newMusic(Gdx.files.internal("v2/datas/day.ogg"));
 		night_music = Gdx.audio.newMusic(Gdx.files.internal("v2/datas/night.ogg"));
 		night_music.setLooping(true);
-		//night_music.play();
+		day_music.setLooping(true);
+//		if(mCfg.mBgMusicOn){
+//			night_music.play();
+//		}
 		
 		if (mgr.isLoaded("v2/map/v2map.tmx")){
 			//Gdx.app.log("", "------------ map loaded");
@@ -334,16 +374,28 @@ public class SCRMain implements Screen, GestureListener {
 		// TODO Auto-generated method stub
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-  
+  //Gdx.app.log("", "---------render------------");
 		if(mCfg.mBDayMode){
 			if(night_music.isPlaying()){
 				night_music.stop();
 			}
+			if(!day_music.isPlaying() && mCfg.mBgMusicOn){
+				day_music.play();
+			}
+//			else{
+//				day_music.pause();
+//			}
 		}
 		else{
-			if(!night_music.isPlaying()){
+			if(day_music.isPlaying()){
+				day_music.stop();
+			}
+			if(!night_music.isPlaying() && mCfg.mBgMusicOn){
 				night_music.play();
 			}
+//			else{
+//				night_music.pause();
+//			}
 		}
 		
 		
@@ -371,6 +423,8 @@ public class SCRMain implements Screen, GestureListener {
 		
 		upateCloud();
 		DrawCloud();
+		
+		//Gdx.app.log("", ""+Gdx.graphics.getFramesPerSecond());
  	}
 
 	@Override
@@ -411,7 +465,7 @@ public class SCRMain implements Screen, GestureListener {
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
 		// TODO Auto-generated method stub
-		//Gdx.app.log("", "touchDown");
+		Gdx.app.log("", "gesture..touchDown");
 		return false;
 	}
 
@@ -422,7 +476,7 @@ public class SCRMain implements Screen, GestureListener {
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		// TODO Auto-generated method stub
-		//Gdx.app.log("", String.format("tap x=%f,y=%f,count=%d",x,y,count));
+		Gdx.app.log("", String.format("gesture..tap x=%f,y=%f,count=%d",x,y,count));
 		
 //		int w = Gdx.graphics.getWidth();
 //		int h = Gdx.graphics.getHeight();
@@ -484,17 +538,18 @@ public class SCRMain implements Screen, GestureListener {
 	@Override
 	public boolean longPress(float x, float y) {
 		// TODO Auto-generated method stub
-		Gdx.app.log("", String.format("longPress x=%f,y=%f",x,y));
-		
-		resetView();
-		
-		return true;
+//		Gdx.app.log("", String.format("gesture..longPress x=%f,y=%f",x,y));
+//		
+//		resetView();
+//		
+//		return true;
+		return false;
 	}
 
 	@Override
 	public boolean fling(float velocityX, float velocityY, int button) {
 		// TODO Auto-generated method stub
-		Gdx.app.log("", String.format("fling x=%f,y=%f",velocityX,velocityY));
+		Gdx.app.log("", String.format("gesture..fling x=%f,y=%f",velocityX,velocityY));
 		
 		if(velocityX>1000){
 			if(mCurPg-1 < 0){
@@ -503,6 +558,7 @@ public class SCRMain implements Screen, GestureListener {
 			else{
 				mCurPg--;
 			}
+			mCfg.mLastSwitchSrc_time = System.currentTimeMillis();
 		}
 		else if(velocityX < -1000){
 			if(mCurPg+1 > 2){
@@ -511,6 +567,7 @@ public class SCRMain implements Screen, GestureListener {
 			else{
 				mCurPg++;
 			}
+			mCfg.mLastSwitchSrc_time = System.currentTimeMillis();
 		}
 		return false;
 	}
@@ -521,7 +578,9 @@ public class SCRMain implements Screen, GestureListener {
 	@Override
 	public boolean pan(float x, float y, float deltaX, float deltaY) {
 		// TODO Auto-generated method stub
-//		Gdx.app.log("", String.format("pan"));
+		//Gdx.app.log("", String.format("gesture..pan"));
+		mCfg.mLastSwitchSrc_time = System.currentTimeMillis();
+		
 		
 //		mXcnt += deltaX;
 //		mYcnt += deltaY;
@@ -585,7 +644,7 @@ public class SCRMain implements Screen, GestureListener {
 	@Override
 	public boolean panStop(float x, float y, int pointer, int button) {
 		// TODO Auto-generated method stub
-		Gdx.app.log("", String.format("panstop x=%f,y=%f, pointer=%d",x,y, pointer));
+		Gdx.app.log("", String.format("gesture..panstop x=%f,y=%f, pointer=%d",x,y, pointer));
 		
 		//清除累计
 		mXcnt =   mYcnt = 0;
@@ -603,7 +662,7 @@ public class SCRMain implements Screen, GestureListener {
 	@Override
 	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
 		// TODO Auto-generated method stub
-		//Gdx.app.log("", String.format("pinch  " ));
+		Gdx.app.log("", String.format("pinch  " ));
 		return false;
 	}
 	
@@ -615,7 +674,7 @@ public class SCRMain implements Screen, GestureListener {
 				mCamera.position.x ++;
 				mMvStepsX --;
 			}
-			else if(mMvStepsX < 0){
+			else if(mMvStepsX < 0){ 
 				mCamera.position.x --;
 				mMvStepsX ++;
 			}
@@ -653,7 +712,6 @@ public class SCRMain implements Screen, GestureListener {
 			mToDftPeriod = 0f;
 		}
 		mCfg.mCurCameraZoom = mCamera.zoom;
-
 	}
 	
 	private void resetView(){
@@ -662,6 +720,9 @@ public class SCRMain implements Screen, GestureListener {
 		mCfg.mCurCameraZoom = mCamera.zoom;
 		//mCamera.translate(1, -1);
 		mCamera.update();
+		
+//	    Gdx.graphics.setContinuousRendering(false);
+//	    Gdx.graphics.requestRendering();
 	}
 	
 }	

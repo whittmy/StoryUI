@@ -28,6 +28,16 @@ public class MyGame extends Game {
 		// TODO Auto-generated method stub
 		//LoadingScr sc = new LoadingScr(this);
 		//this.setScreen(sc);
+		
+//		Gdx.graphics.setDisplayMode(800,480,true);// set resolution to HD ready (1280 x 720) and set full-screen to true  
+//	        // set resolution to default and set full-screen to true  
+//	    Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);  
+//	    Gdx.graphics.setVSync(true); 
+ 
+//	    Gdx.graphics.setContinuousRendering(false);
+//	    Gdx.graphics.requestRendering();
+	    
+	    
 		Gdx.app.log("", "------------MyGame.create");
 		SCRLoading sc = new SCRLoading(this);
 		this.setScreen(sc);
@@ -51,6 +61,7 @@ public class MyGame extends Game {
 //		SCRLoading sc = new SCRLoading(this);
 //		this.setScreen(sc);
 		//this.setScreen(new SCRMain(this));
+//		Gdx.graphics.setContinuousRendering(false);
 	}
 	
 	

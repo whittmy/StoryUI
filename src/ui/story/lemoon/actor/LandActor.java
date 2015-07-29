@@ -2,6 +2,8 @@ package ui.story.lemoon.actor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ui.story.lemoon.Configer;
 
@@ -30,8 +32,7 @@ public class LandActor extends Actor{
 	float mPosMinX, mPosMinY;
 	float mPosSecX, mPosSecY;
 	float mPosTimeX, mPosTimeY;
-	int stateTime_Time = -1;
-
+ 
 	
 	//ripple
 	Animation mRippleAnim;
@@ -102,10 +103,21 @@ public class LandActor extends Actor{
 		//cloud
 		mPosCloudX = 39f; mPosCloudY=20.1f;
 		mRotCloud = mCfg.mTextureAltas.findRegion("night_cloud1");
+		
+		
+		//mTimer = new Timer(true);
+		//mTimer.schedule(mTask, 0, 1000);
 	}
 	
+//	TimerTask mTask = new TimerTask(){
+//		@Override
+//		public void run() {
+//			// TODO Auto-generated method stub
+//			genTimeInfo();
+//		}};
+//	
 	//=== 绘制时间相关
-	String mTimeStr = "";
+	StringBuffer mTimeStr = new StringBuffer();
 	SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");//yyyy年MM月dd日   HH:mm:ss 
 	SimpleDateFormat formatter_H = new SimpleDateFormat("HH");
 	SimpleDateFormat formatter_M = new SimpleDateFormat("mm");
@@ -113,59 +125,67 @@ public class LandActor extends Actor{
 	float mRotatHour = 0f; // x/12f * 360f
 	float mRotatMin = 0f;	// x/60f *360f
 	float mRotatSec= 0;		// x/60f * 360f
-	boolean bfirst = true;
-	Date mCurDate = new Date();
+ 	Date mCurDate = new Date();
+	Timer mTimer = null;
+	
+	
+	long mLastTm = 0;
 	void genTimeInfo(){
 		//time rel
-		//stateTime_Time += Gdx.graphics.getDeltaTime();
-		
-		mCurDate.setTime(System.currentTimeMillis());
+		mLastTm = System.currentTimeMillis();
+		mCurDate.setTime(mLastTm);
 		//mTimeStr = formatter.format(mCurDate);
-
+		
 		//这儿的获取时间应该在下面的判断之前，否则有问题。
 		//mCurDate.getDate(); //1-31
-		mCfg.mHour = mCurDate.getHours();//
+		mCfg.mHour = mCurDate.getHours();
 		mCfg.mMin = mCurDate.getMinutes();
 		mCfg.mSec = mCurDate.getSeconds();	
 		mCfg.mBhadsettime = true;
-		
-		//每1秒执行下面一次
-		if(mCfg.mSec != stateTime_Time || bfirst){
-			//获取系统时间 
-			//mCurDate = new Date();
-
-			//Gdx.app.log("", String.format("land:%d:%d:%d", mCfg.mHour, mCfg.mMin,mCfg.mSec));
-			if(mCfg.mHour > 5 && mCfg.mHour<18){
-				mCfg.mBDayMode = true;
-			}
-			else{
-				mCfg.mBDayMode = false;
-			}
-			
-			mTimeStr = String.format("%02d%s%02d", mCfg.mHour,(mCfg.mSec%2==0)?" ":":", mCfg.mMin);
-
-			int h = mCfg.mHour;
-			if(h > 12) h -= 12;
-
-			mRotatHour = 360f * h/12f;
-			float tmp  = mCfg.mMin/60f;
-			mRotatMin = 360f * tmp - 90f; //因为其自身的默认角度是横着的，所以减去90度
-			mRotatHour = (mRotatHour+ tmp*30f) % 360f;  //时针并非始终是整点的，再分针移动过程中其也适当的增加
-			
-			mRotatSec = 360f * mCfg.mSec/60f - 90f;
-			//<<<
-			
-			//清零，为了下一秒
-			stateTime_Time = mCfg.mSec;
  
-			bfirst = false;
+		//获取系统时间 
+		//mCurDate = new Date();
+		Gdx.app.log("", String.format("land:%d:%d:%d", mCfg.mHour, mCfg.mMin,mCfg.mSec));
+		if(mCfg.mHour > 5 && mCfg.mHour<18){
+			mCfg.mBDayMode = true;
+		}
+		else{
+			mCfg.mBDayMode = false;
+		}
+		
+		//mTimeStr = String.format("%02d%s%02d", mCfg.mHour,(mCfg.mSec%2==0)?" ":":", mCfg.mMin);
+		mTimeStr.delete(0, mTimeStr.length());
+		if(mCfg.mHour<10){
+			mTimeStr.append("0").append( mCfg.mHour);
+		}
+		else{
+			mTimeStr.append(mCfg.mHour);
+		}
+		
+		mTimeStr = ((mCfg.mSec%2)==0) ?  mTimeStr.append(" "): mTimeStr.append(":");		
+		if(mCfg.mMin<10){
+			mTimeStr.append("0").append(mCfg.mMin);
+		}
+		else{
+			mTimeStr.append(mCfg.mMin);
 		}		
+		
+		
+		int h = mCfg.mHour;
+		if(h > 12) h -= 12;
+
+		mRotatHour = 360f * h/12f;
+		float tmp  = mCfg.mMin/60f;
+		mRotatMin = 360f * tmp - 90f; //因为其自身的默认角度是横着的，所以减去90度
+		mRotatHour = (mRotatHour+ tmp*30f) % 360f;  //时针并非始终是整点的，再分针移动过程中其也适当的增加
+		mRotatSec = 360f * mCfg.mSec/60f - 90f;
+	
 	}
 
 	//(37, 13) => (37, (32-13))==(37, 19)
 	private void drawTimeRela(Batch batch) {
 		//显示时间
-		mCfg.font.draw(batch, mTimeStr,mPosTimeX, mPosTimeY); //width-12
+		mCfg.font.draw(batch, mTimeStr.toString(),mPosTimeX, mPosTimeY); //width-12
 
 		//绘制指针位置		
 		batch.draw(mRTxHour, mPosHourX, mPosHourY, 
@@ -240,7 +260,34 @@ public class LandActor extends Actor{
 		super.act(delta);
 		
 		computeCloudAngle();
-		genTimeInfo();
+		
+		if(Math.abs(System.currentTimeMillis()-mLastTm)>2000){
+			Gdx.app.log("", "reset timer" );
+
+			try{
+				if(mTimer != null){
+					Gdx.app.log("", "cancel timer" );
+					//mTask.cancel();
+					mTimer.cancel();
+				}
+			}
+			catch(IllegalStateException e){
+				Gdx.app.log("", "IllegalStateException" );
+			}
+			catch(Exception e){
+				Gdx.app.log("", "other Exception" );
+			}
+			 
+				mLastTm = System.currentTimeMillis();
+				mTimer = new Timer(false);
+				mTimer.schedule(new TimerTask(){
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						genTimeInfo();
+					}}, 0, 1000);
+		 
+		}
 	}
 	
 	@Override
@@ -260,5 +307,7 @@ public class LandActor extends Actor{
 		
 		drawCloud(batch);
 	}
+	
+	
 	
 }

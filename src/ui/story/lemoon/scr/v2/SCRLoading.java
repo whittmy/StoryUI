@@ -4,6 +4,7 @@ import ui.story.lemoon.MyGame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
@@ -47,6 +48,9 @@ public class SCRLoading implements Screen , InputProcessor {
 	public void show() {
 		// TODO Auto-generated method stub
 		Gdx.app.log("", "------------SCRLoading.show");
+//	    Gdx.graphics.setContinuousRendering(false);
+//	    Gdx.graphics.requestRendering();
+		
 		
 		W = Gdx.graphics.getWidth();
 		H = Gdx.graphics.getHeight();
@@ -96,6 +100,8 @@ public class SCRLoading implements Screen , InputProcessor {
 		cameraUI.setToOrtho(false, W, H);
 		//camera.zoom = 1f;
 		
+		Gdx.input.setCatchBackKey(true);
+		Gdx.input.setCatchMenuKey(true);
 		Gdx.input.setInputProcessor(this);   //必须
 	}
 
@@ -155,14 +161,19 @@ public class SCRLoading implements Screen , InputProcessor {
 		Gdx.gl.glClearColor(82*a, 173*a, 243*a, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		if(mbPressed){
+		if(mbPressed && Gdx.input.isTouched()){
 			mboatPos += 5f;
+			//Gdx.app.log("", "mbpressed="+false);
+
 		}
 		else{
+			mbPressed =  false;
 			mboatPos = 20;
 		}
 		if(mboatPos > 580){
 			Gdx.app.log("", "boat pos="+mboatPos);
+			//Gdx.graphics.setContinuousRendering(false);
+
 			game.setScreen(new SCRMain(game));
 		}
 		
@@ -268,12 +279,20 @@ public class SCRLoading implements Screen , InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
+		if(keycode == Input.Keys.BACK || keycode==Input.Keys.MENU){
+			Gdx.app.log("", "========SCRMain keydown: back|menu");
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
 		// TODO Auto-generated method stub
+		if(keycode == Input.Keys.BACK || keycode==Input.Keys.MENU){
+			Gdx.app.log("", "========SCRMain keyup: back|menu ");
+			return true;
+		}
 		return false;
 	}
 
@@ -289,7 +308,7 @@ public class SCRLoading implements Screen , InputProcessor {
 		// TODO Auto-generated method stub
 		int x = screenX;
 		int y = (int)(H-screenY-1);
-		Gdx.app.log("", String.format("down:(%d,%d)", x, y));
+		Gdx.app.log("", String.format("touchdown:(%d,%d)", x, y));
 //		y>50<100
 //		x>623 744
 		
@@ -304,7 +323,8 @@ public class SCRLoading implements Screen , InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
-		mbPressed = false;
+		Gdx.app.log("", String.format("touchup:(%d,%d)", screenX, screenY));
+		//mbPressed = false;
 		return true;
 		//return false;
 	}
