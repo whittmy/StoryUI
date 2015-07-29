@@ -16,6 +16,7 @@ import ui.story.lemoon.BsuEvent;
 import ui.story.lemoon.MyGame;
 import ui.story.lemoon.msg.MyMsg;
 import ui.story.lemoon.nouse.nouse_MainUI;
+ 
 
 
 public class AndroidLauncher extends AndroidApplication {
@@ -69,7 +70,8 @@ public class AndroidLauncher extends AndroidApplication {
 	
 	
 	private BatteryReceiver batteryReceiver;
-	
+	NetworkStateReceiver networkStateReceiver;
+
 	
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
@@ -80,6 +82,14 @@ public class AndroidLauncher extends AndroidApplication {
 	    config.useCompass = false;
 	    
 		batteryReceiver = new BatteryReceiver();
+		
+		
+		if(networkStateReceiver == null){
+			networkStateReceiver = new NetworkStateReceiver();
+			networkStateReceiver.setChangedListener(new NetworkStatusChangeListener());
+			registerReceiver(networkStateReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+		}
+		
 		
 		//ntp对时
 		Intent intent=new Intent("adjusttime.lemoon.SNTP");    
@@ -94,6 +104,23 @@ public class AndroidLauncher extends AndroidApplication {
 			public void notify(MyMsg msg) {
 				Intent it;
 				ComponentName com;
+				
+				if(!mBConnected && (msg.what!=MyMsg.ITEM_PAINT) && (msg.what!=MyMsg.ITEM_SETTING) ){
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							Toast.makeText(AndroidLauncher.this, "当前没有网络，将为你打开本地管理", Toast.LENGTH_SHORT).show();
+						}
+					});
+					
+					it = new Intent();
+					com= new ComponentName("com.gw.launcher", "com.gw.launcher.Launcher");  
+					it.setComponent(com); 
+					startActivity(it);	
+					return;
+				}
+				
 				switch(msg.what){
 				case MyMsg.ITEM_GUOXUE:
 					//=============规定： 我们的资源分类 从10000开始   ============================
@@ -139,31 +166,39 @@ public class AndroidLauncher extends AndroidApplication {
 					break;
 				case MyMsg.ITEM_LOCAL:
 					System.out.println("LOCAL");
+					it = new Intent();
+					com= new ComponentName("com.gw.launcher", "com.gw.launcher.Launcher");  
+					it.setComponent(com); 
+					startActivity(it);	
+					
 					break;
 				case MyMsg.ITEM_MATHS:
 					System.out.println("MATHS");
-//					it = new Intent();
-//					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
-//					it.setComponent(com); 
-//					it.putExtra("curCata",  "数理思维");
-//					it.putExtra("cataId", 6);				
-//					
-//					startActivity(it);		
+					it = new Intent();
+					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
+					it.setComponent(com); 
+					it.putExtra("curCata",  "数理思维");
+					it.putExtra("cataId", 6);				
+					
+					startActivity(it);		
 					break;
 				case MyMsg.ITEM_MUSIC:
 					System.out.println("MUSIC");
-//					it = new Intent();
-//					com= new ComponentName("children.lemoon", "children.lemoon.music.MuPlayer");  
-//					it.setComponent(com); 
-// 
-//					it.putExtra("curCata",  "网络音乐测试");
-//					it.putExtra("cataId", 100);
-//					startActivity(it);
-					
-					
+					it = new Intent();
+					com= new ComponentName("children.lemoon", "children.lemoon.categrid.MoviesGridActivity");  
+					it.setComponent(com); 
+					it.putExtra("curCata",  "音乐儿歌");
+					it.putExtra("cataId", 7);	
+					startActivity(it);
 					break;
+					
 				case MyMsg.ITEM_PAINT:
-					System.out.println("PAINT");
+					System.out.println("PAINT");					
+					it = new Intent();
+					com= new ComponentName("com.ruitong.tuyajjj", "android.app.NativeActivity");  
+					it.setComponent(com); 
+					startActivity(it);
+					
 					break;
 				case MyMsg.ITEM_SCIENCE:
 					System.out.println("SCIENCE");
@@ -177,6 +212,10 @@ public class AndroidLauncher extends AndroidApplication {
 					break;
 				case MyMsg.ITEM_SETTING:
 					System.out.println("SETTING");
+					it = new Intent();
+					com= new ComponentName("com.gw.setting", "com.gw.setting.GWSettings");  
+					it.setComponent(com); 
+					startActivity(it);	
 					break;
 				}
 			}
@@ -198,16 +237,15 @@ public class AndroidLauncher extends AndroidApplication {
         
 		super.onPause();
 	}
-	
-	
-	
+ 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		Log.e("", "------AndroidLauncher onResume");
-		IntentFilter filter = new IntentFilter("android.intent.action.BATTERY_CHANGED");
-		registerReceiver(batteryReceiver, filter);
+//		IntentFilter filter = new IntentFilter("android.intent.action.BATTERY_CHANGED");
+//		registerReceiver(batteryReceiver, filter);
 		
+
 		super.onResume();
 	}
 	
@@ -219,6 +257,10 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onStop();
 		Log.e("", "------AndroidLauncher onStop");
 		//System.exit(0);
+		
+
+		
+
 	}
 	
 	
@@ -227,7 +269,31 @@ public class AndroidLauncher extends AndroidApplication {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		Log.e("", "------AndroidLauncher onDestroy");
+		if (networkStateReceiver != null) {
+			unregisterReceiver(networkStateReceiver);
+			networkStateReceiver = null;
+		}
 	}
 	
 	//ACTION_SCREEN_OFF and ACTION_SCREEN_ON 
+	
+	boolean mBConnected = false;
+	class NetworkStatusChangeListener implements NetworkStateReceiver.OnNetworkStateChangedListener {
+		NetworkStatusChangeListener() {
+		}
+
+		public void onNetworkInvalid() {
+			Toast.makeText(getApplicationContext(), "网络已断开", 0).show();
+			mBConnected = false;
+		}
+
+		public void onNetworkValid() {
+
+			Toast.makeText(getApplicationContext(), "已连接到无线网络", 1).show();
+			mBConnected = true;
+				
+			return;
+		}
+
+	}
 }

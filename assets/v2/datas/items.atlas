@@ -18,13 +18,6 @@ clock
   orig: 96, 224
   offset: 0, 0
   index: -1
-day_cloud
-  rotate: false
-  xy: 904, 10
-  size: 117, 76
-  orig: 117, 76
-  offset: 0, 0
-  index: -1
 day_rainbow
   rotate: false
   xy: 2, 230
@@ -47,6 +40,13 @@ flow1
   offset: 0, 0
   index: -1
 flow2
+  rotate: false
+  xy: 748, 2
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
+flow3
   rotate: false
   xy: 906, 280
   size: 96, 64
@@ -130,16 +130,30 @@ land
   orig: 992, 448
   offset: 0, 0
   index: -1
+meteor1
+  rotate: false
+  xy: 681, 68
+  size: 161, 18
+  orig: 161, 18
+  offset: 0, 0
+  index: -1
+meteor2
+  rotate: false
+  xy: 2, 16
+  size: 161, 18
+  orig: 161, 18
+  offset: 0, 0
+  index: -1
 min
   rotate: false
-  xy: 2, 2
+  xy: 165, 2
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 mlogo
   rotate: false
-  xy: 748, 6
+  xy: 846, 6
   size: 154, 80
   orig: 154, 80
   offset: 0, 0
@@ -172,11 +186,39 @@ ripple3
   orig: 128, 64
   offset: 0, 0
   index: -1
-second
+signal0
   rotate: false
-  xy: 68, 2
-  size: 64, 32
-  orig: 64, 32
+  xy: 996, 981
+  size: 21, 41
+  orig: 21, 41
+  offset: 0, 0
+  index: -1
+signal1
+  rotate: false
+  xy: 972, 531
+  size: 21, 41
+  orig: 21, 41
+  offset: 0, 0
+  index: -1
+signal2
+  rotate: false
+  xy: 567, 465
+  size: 21, 41
+  orig: 21, 41
+  offset: 0, 0
+  index: -1
+signal3
+  rotate: false
+  xy: 996, 938
+  size: 21, 41
+  orig: 21, 41
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 614, 242
+  size: 6, 6
+  orig: 6, 6
   offset: 0, 0
   index: -1
 
@@ -185,11 +227,11 @@ size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-flow3
+day_cloud
   rotate: false
-  xy: 326, 260
-  size: 96, 64
-  orig: 96, 64
+  xy: 326, 248
+  size: 117, 76
+  orig: 117, 76
   offset: 0, 0
   index: -1
 flow4
@@ -201,7 +243,7 @@ flow4
   index: -1
 flow5
   rotate: false
-  xy: 326, 194
+  xy: 326, 182
   size: 96, 64
   orig: 96, 64
   offset: 0, 0
@@ -222,7 +264,7 @@ item_setting
   index: -1
 navi_arrow
   rotate: false
-  xy: 326, 128
+  xy: 326, 116
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
@@ -239,6 +281,20 @@ night_moon
   xy: 2, 326
   size: 160, 160
   orig: 160, 160
+  offset: 0, 0
+  index: -1
+second
+  rotate: false
+  xy: 861, 454
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+specker
+  rotate: false
+  xy: 665, 367
+  size: 56, 53
+  orig: 56, 53
   offset: 0, 0
   index: -1
 sun1

@@ -14,7 +14,6 @@ com.badlogic.gdx.Application:
     public abstract int getVersion()
     public abstract long getJavaHeap()
     public abstract long getNativeHeap()
-    public abstract com.badlogic.gdx.Preferences getPreferences(java.lang.String)
     public abstract com.badlogic.gdx.utils.Clipboard getClipboard()
     public abstract void exit()
 com.badlogic.gdx.ApplicationAdapter
@@ -65,7 +64,6 @@ com.badlogic.gdx.Input:
     public abstract int getY(int)
     public abstract int getDeltaY()
     public abstract int getDeltaY(int)
-    public abstract boolean isTouched()
     public abstract boolean justTouched()
     public abstract boolean isButtonPressed(int)
     public abstract boolean isKeyPressed(int)
@@ -115,7 +113,25 @@ com.badlogic.gdx.Net$HttpRequest
 com.badlogic.gdx.Net$HttpResponse
 com.badlogic.gdx.Net$HttpResponseListener
 com.badlogic.gdx.Net$Protocol
-com.badlogic.gdx.Preferences
+com.badlogic.gdx.Preferences:
+    public abstract com.badlogic.gdx.Preferences putInteger(java.lang.String,int)
+    public abstract com.badlogic.gdx.Preferences putLong(java.lang.String,long)
+    public abstract com.badlogic.gdx.Preferences putFloat(java.lang.String,float)
+    public abstract com.badlogic.gdx.Preferences putString(java.lang.String,java.lang.String)
+    public abstract com.badlogic.gdx.Preferences put(java.util.Map)
+    public abstract int getInteger(java.lang.String)
+    public abstract long getLong(java.lang.String)
+    public abstract float getFloat(java.lang.String)
+    public abstract java.lang.String getString(java.lang.String)
+    public abstract boolean getBoolean(java.lang.String,boolean)
+    public abstract int getInteger(java.lang.String,int)
+    public abstract long getLong(java.lang.String,long)
+    public abstract float getFloat(java.lang.String,float)
+    public abstract java.lang.String getString(java.lang.String,java.lang.String)
+    public abstract java.util.Map get()
+    public abstract boolean contains(java.lang.String)
+    public abstract void clear()
+    public abstract void remove(java.lang.String)
 com.badlogic.gdx.Screen:
     public abstract void dispose()
 com.badlogic.gdx.ScreenAdapter
@@ -166,7 +182,6 @@ com.badlogic.gdx.assets.loaders.resolvers.ResolutionFileResolver$Resolution
 com.badlogic.gdx.audio.AudioDevice
 com.badlogic.gdx.audio.AudioRecorder
 com.badlogic.gdx.audio.Music:
-    public abstract void pause()
     public abstract boolean isLooping()
     public abstract void setVolume(float)
     public abstract float getVolume()
@@ -200,7 +215,6 @@ com.badlogic.gdx.backends.android.AndroidApplication:
     125:126:public android.view.View initializeForView(com.badlogic.gdx.ApplicationListener,com.badlogic.gdx.backends.android.AndroidApplicationConfiguration)
     359:359:public long getJavaHeap()
     364:364:public long getNativeHeap()
-    369:369:public com.badlogic.gdx.Preferences getPreferences(java.lang.String)
     376:379:public com.badlogic.gdx.utils.Clipboard getClipboard()
     400:406:public void exit()
     417:420:public void debug(java.lang.String,java.lang.String,java.lang.Throwable)
@@ -390,7 +404,6 @@ com.badlogic.gdx.backends.android.AndroidInput:
     266:268:public int getY(int)
     279:285:public synchronized boolean isKeyPressed(int)
     290:296:public synchronized boolean isKeyJustPressed(int)
-    301:310:public boolean isTouched()
     426:427:public void onTap(int,int)
     433:434:public void onDrop(int,int)
     437:455:protected void postTap(int,int)
@@ -477,7 +490,25 @@ com.badlogic.gdx.backends.android.AndroidOnscreenKeyboard$2
 com.badlogic.gdx.backends.android.AndroidOnscreenKeyboard$2$1
 com.badlogic.gdx.backends.android.AndroidOnscreenKeyboard$2$2
 com.badlogic.gdx.backends.android.AndroidOnscreenKeyboard$PassThroughEditable
-com.badlogic.gdx.backends.android.AndroidPreferences
+com.badlogic.gdx.backends.android.AndroidPreferences:
+    44:46:public com.badlogic.gdx.Preferences putInteger(java.lang.String,int)
+    51:53:public com.badlogic.gdx.Preferences putLong(java.lang.String,long)
+    58:60:public com.badlogic.gdx.Preferences putFloat(java.lang.String,float)
+    65:67:public com.badlogic.gdx.Preferences putString(java.lang.String,java.lang.String)
+    72:80:public com.badlogic.gdx.Preferences put(java.util.Map)
+    90:90:public int getInteger(java.lang.String)
+    95:95:public long getLong(java.lang.String)
+    100:100:public float getFloat(java.lang.String)
+    105:105:public java.lang.String getString(java.lang.String)
+    110:110:public boolean getBoolean(java.lang.String,boolean)
+    115:115:public int getInteger(java.lang.String,int)
+    120:120:public long getLong(java.lang.String,long)
+    125:125:public float getFloat(java.lang.String,float)
+    130:130:public java.lang.String getString(java.lang.String,java.lang.String)
+    135:135:public java.util.Map get()
+    140:140:public boolean contains(java.lang.String)
+    145:147:public void clear()
+    159:161:public void remove(java.lang.String)
 com.badlogic.gdx.backends.android.AndroidSound:
     44:44:public long play()
     49:54:public long play(float)
@@ -3728,7 +3759,6 @@ com.badlogic.gdx.scenes.scene2d.actions.Actions:
     168:168:public static com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction scaleBy(float,float)
     172:172:public static com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction scaleBy(float,float,float)
     176:180:public static com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction scaleBy(float,float,float,com.badlogic.gdx.math.Interpolation)
-    185:185:public static com.badlogic.gdx.scenes.scene2d.actions.RotateToAction rotateTo(float)
     202:202:public static com.badlogic.gdx.scenes.scene2d.actions.RotateByAction rotateBy(float)
     206:206:public static com.badlogic.gdx.scenes.scene2d.actions.RotateByAction rotateBy(float,float)
     210:214:public static com.badlogic.gdx.scenes.scene2d.actions.RotateByAction rotateBy(float,float,com.badlogic.gdx.math.Interpolation)
@@ -5056,6 +5086,9 @@ com.badlogic.gdx.utils.viewport.Viewport:
 ui.story.lemoon.Anim_FansActor
 ui.story.lemoon.Anim_FansActor$1
 ui.story.lemoon.Anim_MiscActor
+ui.story.lemoon.Configer:
+    public static final java.lang.String PREF_NAME
+    public static final java.lang.String PREF_BGMUSIC
 ui.story.lemoon.actor.CloudActor1:
     float mDayW2
     float mDayH2
@@ -5064,7 +5097,14 @@ ui.story.lemoon.actor.CloudActor1:
 ui.story.lemoon.actor.MoonActor:
     float lasttime
 ui.story.lemoon.actor.NaviActor
+ui.story.lemoon.actor.SpeakerActor:
+    float lasttime
 ui.story.lemoon.android.BuildConfig
+ui.story.lemoon.android.NetworkStateReceiver:
+    private static final java.lang.String TAG
+    20:20:public ui.story.lemoon.android.NetworkStateReceiver$OnNetworkStateChangedListener getChangedListener()
+    24:24:public java.lang.String getTag()
+    93:94:public void setTag(java.lang.String)
 ui.story.lemoon.android.R
 ui.story.lemoon.android.R$attr
 ui.story.lemoon.android.R$drawable
@@ -5111,7 +5151,7 @@ ui.story.lemoon.scr.Main1Src$ScienceActor$1
 ui.story.lemoon.scr.Main1Src$SettingActor
 ui.story.lemoon.scr.Main1Src$SettingActor$1
 ui.story.lemoon.scr.v2.SCRLoading:
-    264:266:public void dispose()
+    275:277:public void dispose()
 ui.story.lemoon.scr.v2.SCRMain:
-    403:409:public void dispose()
-    612:634:private void anim_move()
+    457:463:public void dispose()
+    671:693:private void anim_move()
