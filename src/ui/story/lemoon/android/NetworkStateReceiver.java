@@ -15,7 +15,12 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 	public boolean firstLoad = true;
 	private long preTime;
 	String tag;
-
+	
+	
+	void mylog(String t, String msg){
+		Log.d(t, msg);
+	}
+	
 	public OnNetworkStateChangedListener getChangedListener() {
 		return changedListener;
 	}
@@ -27,18 +32,18 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 	public void onReceive(Context paramContext, Intent paramIntent) {
 		long l = System.currentTimeMillis();
 		if (l - preTime < 2000L) {
-			Log.d("NetworkStateReceiver", "间隔时间太短……");
+			mylog("NetworkStateReceiver", "间隔时间太短……");
 			return;
 		}
 
 		preTime = l;
-		Log.d("NetworkStateReceiver", "网络已连接------intent=" + paramIntent);
+		mylog("NetworkStateReceiver", "网络已连接------intent=" + paramIntent);
 		if (!checkNetwork(paramContext)) {
 			// cond2
-			Log.d("NetworkStateReceiver", "网络已断开---" + tag);
+			mylog("NetworkStateReceiver", "网络已断开---" + tag);
 			changedListener.onNetworkInvalid();
 		} else {
-			Log.d("NetworkStateReceiver", "网络已连接------" + tag);
+			mylog("NetworkStateReceiver", "网络已连接------" + tag);
 			if (changedListener != null)
 				changedListener.onNetworkValid();
 		}

@@ -50,7 +50,6 @@ com.badlogic.gdx.Graphics:
     public abstract void setTitle(java.lang.String)
     public abstract void setVSync(boolean)
     public abstract com.badlogic.gdx.Graphics$BufferFormat getBufferFormat()
-    public abstract void setContinuousRendering(boolean)
     public abstract boolean isContinuousRendering()
     public abstract boolean isFullscreen()
 com.badlogic.gdx.Graphics$GraphicsType
@@ -64,6 +63,7 @@ com.badlogic.gdx.Input:
     public abstract int getY(int)
     public abstract int getDeltaY()
     public abstract int getDeltaY(int)
+    public abstract boolean isTouched()
     public abstract boolean justTouched()
     public abstract boolean isButtonPressed(int)
     public abstract boolean isKeyPressed(int)
@@ -144,7 +144,6 @@ com.badlogic.gdx.assets.AssetManager:
     260:260:public com.badlogic.gdx.assets.loaders.AssetLoader getLoader(java.lang.Class)
     339:340:public synchronized void load(com.badlogic.gdx.assets.AssetDescriptor)
     366:371:public boolean update(int)
-    385:391:public void finishLoadingAsset(java.lang.String)
     563:563:public synchronized int getLoadedAssets()
     568:568:public synchronized int getQueuedAssets()
     573:574:public synchronized float getProgress()
@@ -404,6 +403,7 @@ com.badlogic.gdx.backends.android.AndroidInput:
     266:268:public int getY(int)
     279:285:public synchronized boolean isKeyPressed(int)
     290:296:public synchronized boolean isKeyJustPressed(int)
+    301:310:public boolean isTouched()
     426:427:public void onTap(int,int)
     433:434:public void onDrop(int,int)
     437:455:protected void postTap(int,int)
@@ -2020,7 +2020,10 @@ com.badlogic.gdx.graphics.g2d.SpriteCache
 com.badlogic.gdx.graphics.g2d.SpriteCache$Cache
 com.badlogic.gdx.graphics.g2d.TextureAtlas:
     211:212:public TextureAtlas(java.lang.String)
+    216:217:public TextureAtlas(com.badlogic.gdx.files.FileHandle)
     222:223:public TextureAtlas(com.badlogic.gdx.files.FileHandle,boolean)
+    226:227:public TextureAtlas(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.files.FileHandle)
+    231:232:public TextureAtlas(com.badlogic.gdx.files.FileHandle,com.badlogic.gdx.files.FileHandle,boolean)
     277:284:public com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion addRegion(java.lang.String,com.badlogic.gdx.graphics.Texture,int,int,int,int)
     289:289:public com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion addRegion(java.lang.String,com.badlogic.gdx.graphics.g2d.TextureRegion)
     311:317:public com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion findRegion(java.lang.String,int)
@@ -3729,7 +3732,6 @@ com.badlogic.gdx.scenes.scene2d.Stage:
     686:686:public com.badlogic.gdx.graphics.Camera getCamera()
     714:716:public com.badlogic.gdx.math.Vector2 stageToScreenCoordinates(com.badlogic.gdx.math.Vector2)
     724:724:public com.badlogic.gdx.math.Vector2 toScreenCoordinates(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Matrix4)
-    743:744:public void setActionsRequestRendering(boolean)
     757:758:public void setDebugInvisible(boolean)
     762:768:public void setDebugAll(boolean)
     772:778:public void setDebugUnderMouse(boolean)
@@ -5083,12 +5085,12 @@ com.badlogic.gdx.utils.viewport.Viewport:
     230:230:public int getBottomGutterHeight()
     235:235:public int getTopGutterY()
     240:240:public int getTopGutterHeight()
-ui.story.lemoon.Anim_FansActor
-ui.story.lemoon.Anim_FansActor$1
-ui.story.lemoon.Anim_MiscActor
 ui.story.lemoon.Configer:
     public static final java.lang.String PREF_NAME
     public static final java.lang.String PREF_BGMUSIC
+    133:138:public void disposeNightMusic()
+    149:154:public void disposeDayMusic()
+    197:201:public void disposeMainAtlas()
 ui.story.lemoon.actor.CloudActor1:
     float mDayW2
     float mDayH2
@@ -5110,7 +5112,7 @@ ui.story.lemoon.android.R$attr
 ui.story.lemoon.android.R$drawable
 ui.story.lemoon.android.R$string
 ui.story.lemoon.android.R$style
-ui.story.lemoon.msg.MyMsg:
+ui.story.lemoon.comunicate.MyMsg:
     public java.lang.Object obj1
     public java.lang.Object obj2
     public static final int ITEM_LIFE
@@ -5123,35 +5125,9 @@ ui.story.lemoon.msg.MyMsg:
     public static final int ITEM_LANGUAGE
     public static final int ITEM_LOCAL
     public static final int ITEM_SETTING
-ui.story.lemoon.nouse.nouse_Anim_RippleActor
-ui.story.lemoon.nouse.nouse_Anim_WindMill
-ui.story.lemoon.nouse.nouse_FaceActor
-ui.story.lemoon.nouse.nouse_FaceActor$1
-ui.story.lemoon.nouse.nouse_MainUI
-ui.story.lemoon.scr.LoadingScr
-ui.story.lemoon.scr.Main1Src
-ui.story.lemoon.scr.Main1Src$CartonActor
-ui.story.lemoon.scr.Main1Src$CartonActor$1
-ui.story.lemoon.scr.Main1Src$GuoXueActor
-ui.story.lemoon.scr.Main1Src$GuoXueActor$1
-ui.story.lemoon.scr.Main1Src$LanguageActor
-ui.story.lemoon.scr.Main1Src$LanguageActor$1
-ui.story.lemoon.scr.Main1Src$LifeActor
-ui.story.lemoon.scr.Main1Src$LifeActor$1
-ui.story.lemoon.scr.Main1Src$LocalActor
-ui.story.lemoon.scr.Main1Src$LocalActor$1
-ui.story.lemoon.scr.Main1Src$MathActor
-ui.story.lemoon.scr.Main1Src$MathActor$1
-ui.story.lemoon.scr.Main1Src$MusicActor
-ui.story.lemoon.scr.Main1Src$MusicActor$1
-ui.story.lemoon.scr.Main1Src$PaintActor
-ui.story.lemoon.scr.Main1Src$PaintActor$1
-ui.story.lemoon.scr.Main1Src$ScienceActor
-ui.story.lemoon.scr.Main1Src$ScienceActor$1
-ui.story.lemoon.scr.Main1Src$SettingActor
-ui.story.lemoon.scr.Main1Src$SettingActor$1
+    public static final int ITEM_EXPLORER
 ui.story.lemoon.scr.v2.SCRLoading:
-    275:277:public void dispose()
+    282:284:public void dispose()
 ui.story.lemoon.scr.v2.SCRMain:
-    457:463:public void dispose()
-    671:693:private void anim_move()
+    498:501:public void dispose()
+    611:633:private void anim_move()

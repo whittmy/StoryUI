@@ -11,25 +11,11 @@ bottom_cloud
   orig: 563, 116
   offset: 0, 0
   index: -1
-clock
-  rotate: false
-  xy: 808, 348
-  size: 96, 224
-  orig: 96, 224
-  offset: 0, 0
-  index: -1
 day_rainbow
   rotate: false
   xy: 2, 230
   size: 416, 224
   orig: 416, 224
-  offset: 0, 0
-  index: -1
-fan
-  rotate: false
-  xy: 808, 250
-  size: 96, 96
-  orig: 96, 96
   offset: 0, 0
   index: -1
 flow1
@@ -42,13 +28,6 @@ flow1
 flow2
   rotate: false
   xy: 748, 2
-  size: 96, 64
-  orig: 96, 64
-  offset: 0, 0
-  index: -1
-flow3
-  rotate: false
-  xy: 906, 280
   size: 96, 64
   orig: 96, 64
   offset: 0, 0
@@ -72,6 +51,13 @@ item_draw
   xy: 487, 68
   size: 192, 160
   orig: 192, 160
+  offset: 0, 0
+  index: -1
+item_explorer
+  rotate: false
+  xy: 808, 421
+  size: 212, 151
+  orig: 212, 151
   offset: 0, 0
   index: -1
 item_guoxue
@@ -104,23 +90,16 @@ item_local
   index: -1
 item_music
   rotate: false
-  xy: 681, 88
+  xy: 808, 259
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 item_science
   rotate: false
-  xy: 843, 88
+  xy: 681, 88
   size: 160, 160
   orig: 160, 160
-  offset: 0, 0
-  index: -1
-item_tower
-  rotate: false
-  xy: 906, 444
-  size: 64, 128
-  orig: 64, 128
   offset: 0, 0
   index: -1
 land
@@ -153,16 +132,16 @@ min
   index: -1
 mlogo
   rotate: false
-  xy: 846, 6
+  xy: 846, 15
   size: 154, 80
   orig: 154, 80
   offset: 0, 0
   index: -1
-night_cloud1
+night_moon
   rotate: false
-  xy: 906, 346
-  size: 96, 96
-  orig: 96, 96
+  xy: 843, 97
+  size: 160, 160
+  orig: 160, 160
   offset: 0, 0
   index: -1
 ripple1
@@ -195,7 +174,7 @@ signal0
   index: -1
 signal1
   rotate: false
-  xy: 972, 531
+  xy: 970, 378
   size: 21, 41
   orig: 21, 41
   offset: 0, 0
@@ -227,107 +206,142 @@ size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+clock
+  rotate: false
+  xy: 2, 264
+  size: 96, 224
+  orig: 96, 224
+  offset: 0, 0
+  index: -1
 day_cloud
   rotate: false
-  xy: 326, 248
+  xy: 439, 250
   size: 117, 76
   orig: 117, 76
   offset: 0, 0
   index: -1
+fan
+  rotate: false
+  xy: 2, 166
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+flow3
+  rotate: false
+  xy: 100, 132
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
 flow4
   rotate: false
-  xy: 665, 422
+  xy: 558, 262
   size: 96, 64
   orig: 96, 64
   offset: 0, 0
   index: -1
 flow5
   rotate: false
-  xy: 326, 182
+  xy: 2, 2
   size: 96, 64
   orig: 96, 64
   offset: 0, 0
   index: -1
 item_math
   rotate: false
-  xy: 488, 358
+  xy: 100, 198
   size: 175, 128
   orig: 175, 128
   offset: 0, 0
   index: -1
 item_setting
   rotate: false
-  xy: 164, 34
+  xy: 277, 198
   size: 160, 128
   orig: 160, 128
   offset: 0, 0
   index: -1
-navi_arrow
+item_tower
   rotate: false
-  xy: 326, 116
-  size: 64, 64
-  orig: 64, 64
+  xy: 910, 360
+  size: 64, 128
+  orig: 64, 128
+  offset: 0, 0
+  index: -1
+left_tap
+  rotate: false
+  xy: 198, 130
+  size: 60, 66
+  orig: 60, 66
   offset: 0, 0
   index: -1
 night_cloud
   rotate: false
-  xy: 763, 422
+  xy: 100, 66
   size: 96, 64
   orig: 96, 64
   offset: 0, 0
   index: -1
-night_moon
+night_cloud1
   rotate: false
-  xy: 2, 326
-  size: 160, 160
-  orig: 160, 160
+  xy: 2, 68
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+right_tap
+  rotate: false
+  xy: 260, 130
+  size: 60, 66
+  orig: 60, 66
   offset: 0, 0
   index: -1
 second
   rotate: false
-  xy: 861, 454
+  xy: 439, 216
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 specker
   rotate: false
-  xy: 665, 367
+  xy: 656, 273
   size: 56, 53
   orig: 56, 53
   offset: 0, 0
   index: -1
 sun1
   rotate: false
-  xy: 2, 164
+  xy: 100, 328
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 sun2
   rotate: false
-  xy: 164, 326
+  xy: 262, 328
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 sun3
   rotate: false
-  xy: 2, 2
+  xy: 424, 328
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 sun4
   rotate: false
-  xy: 164, 164
+  xy: 586, 328
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 sun5
   rotate: false
-  xy: 326, 326
+  xy: 748, 328
   size: 160, 160
   orig: 160, 160
   offset: 0, 0

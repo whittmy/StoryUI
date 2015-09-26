@@ -69,6 +69,7 @@ com.badlogic.gdx.Graphics -> com.badlogic.gdx.i:
     float getDeltaTime() -> c
     com.badlogic.gdx.Graphics$DisplayMode getDesktopDisplayMode() -> d
     boolean supportsExtension(java.lang.String) -> a
+    void setContinuousRendering(boolean) -> a
     void requestRendering() -> e
 com.badlogic.gdx.Graphics$BufferFormat -> com.badlogic.gdx.j:
     int r -> a
@@ -89,9 +90,8 @@ com.badlogic.gdx.Graphics$DisplayMode -> com.badlogic.gdx.k:
 com.badlogic.gdx.Input -> com.badlogic.gdx.l:
     int getX() -> a
     int getY() -> b
-    boolean isTouched() -> c
     boolean isTouched(int) -> a
-    long getCurrentEventTime() -> d
+    long getCurrentEventTime() -> c
     void setCatchBackKey(boolean) -> a
     void setCatchMenuKey(boolean) -> b
     void setInputProcessor(com.badlogic.gdx.InputProcessor) -> a
@@ -204,21 +204,22 @@ com.badlogic.gdx.assets.AssetManager -> com.badlogic.gdx.a.f:
     void load(java.lang.String,java.lang.Class,com.badlogic.gdx.assets.AssetLoaderParameters) -> a
     boolean update() -> a
     void finishLoading() -> b
+    void finishLoadingAsset(java.lang.String) -> d
     void injectDependencies(java.lang.String,com.badlogic.gdx.utils.Array) -> a
     void injectDependency(java.lang.String,com.badlogic.gdx.assets.AssetDescriptor) -> a
     void nextTask() -> e
     void addTask(com.badlogic.gdx.assets.AssetDescriptor) -> a
     void addAsset(java.lang.String,java.lang.Class,java.lang.Object) -> a
     boolean updateTask() -> f
-    void incrementRefCountedDependencies(java.lang.String) -> f
+    void incrementRefCountedDependencies(java.lang.String) -> g
     void handleTaskError(java.lang.Throwable) -> a
     void setLoader(java.lang.Class,com.badlogic.gdx.assets.loaders.AssetLoader) -> a
     void setLoader(java.lang.Class,java.lang.String,com.badlogic.gdx.assets.loaders.AssetLoader) -> a
     void dispose() -> c
     void clear() -> d
-    int getReferenceCount(java.lang.String) -> d
+    int getReferenceCount(java.lang.String) -> e
     void setReferenceCount(java.lang.String,int) -> a
-    com.badlogic.gdx.utils.Array getDependencies(java.lang.String) -> e
+    com.badlogic.gdx.utils.Array getDependencies(java.lang.String) -> f
 com.badlogic.gdx.assets.RefCountedContainer -> com.badlogic.gdx.a.g:
     java.lang.Object object -> a
     int refCount -> b
@@ -667,23 +668,22 @@ com.badlogic.gdx.backends.android.AndroidInput -> com.badlogic.gdx.backends.andr
     int getX() -> a
     int getY() -> b
     boolean isTouched(int) -> a
-    boolean isTouched() -> c
     void setInputProcessor(com.badlogic.gdx.InputProcessor) -> a
-    void processEvents() -> e
+    void processEvents() -> d
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
     boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
     void setCatchBackKey(boolean) -> a
     void setCatchMenuKey(boolean) -> b
-    void registerSensorListeners() -> f
-    void unregisterSensorListeners() -> g
-    int getFreePointerIndex() -> h
+    void registerSensorListeners() -> e
+    void unregisterSensorListeners() -> f
+    int getFreePointerIndex() -> g
     int[] resize(int[]) -> a
     boolean[] resize(boolean[]) -> a
     int lookUpPointerIndex(int) -> b
-    int getRotation() -> i
-    long getCurrentEventTime() -> d
-    void onPause() -> j
-    void onResume() -> k
+    int getRotation() -> h
+    long getCurrentEventTime() -> c
+    void onPause() -> i
+    void onResume() -> j
 com.badlogic.gdx.backends.android.AndroidInput$1 -> com.badlogic.gdx.backends.android.l:
     com.badlogic.gdx.backends.android.AndroidInput this$0 -> a
     com.badlogic.gdx.backends.android.AndroidInput$KeyEvent newObject() -> a
@@ -3520,6 +3520,7 @@ com.badlogic.gdx.scenes.scene2d.Stage -> com.badlogic.gdx.g.a.j:
     com.badlogic.gdx.scenes.scene2d.Actor hit(float,float,boolean) -> a
     com.badlogic.gdx.math.Vector2 screenToStageCoordinates(com.badlogic.gdx.math.Vector2) -> a
     void calculateScissors(com.badlogic.gdx.math.Rectangle,com.badlogic.gdx.math.Rectangle) -> a
+    void setActionsRequestRendering(boolean) -> a
     boolean getActionsRequestRendering() -> j
     com.badlogic.gdx.graphics.Color getDebugColor() -> k
     void dispose() -> c
@@ -4906,9 +4907,7 @@ com.badlogic.gdx.utils.viewport.Viewport -> com.badlogic.gdx.utils.c.c:
     int getScreenWidth() -> f
     int getScreenHeight() -> g
     void setScreenBounds(int,int,int,int) -> a
-ui.story.lemoon.BsuEvent -> ui.story.lemoon.a:
-    void notify(ui.story.lemoon.msg.MyMsg) -> a
-ui.story.lemoon.Configer -> ui.story.lemoon.b:
+ui.story.lemoon.Configer -> ui.story.lemoon.a:
     int MAP_WIDTH -> a
     int MAP_HEIGHT -> b
     int mCurPage -> c
@@ -4918,20 +4917,42 @@ ui.story.lemoon.Configer -> ui.story.lemoon.b:
     int mSec -> g
     boolean mBDayMode -> h
     ui.story.lemoon.MyGame game -> i
-    com.badlogic.gdx.graphics.g2d.TextureAtlas mTextureAltas -> j
-    com.badlogic.gdx.graphics.g2d.BitmapFont font -> k
-    float mCurCameraZoom -> l
-    java.util.Timer mTimer -> m
+    float mCurCameraZoom -> j
+    java.util.Timer mTimer -> k
+    long mLastTimerTm -> l
+    ui.story.lemoon.Configer$GlobalRefreshTask mGlobalTask -> m
     long mLastSwitchSrc_time -> n
     boolean mBgMusicOn -> o
     ui.story.lemoon.Configer$BgMusicListener mBgMusicListener -> p
+    com.badlogic.gdx.assets.AssetManager mMgr -> q
+    com.badlogic.gdx.audio.Music night_music -> r
+    com.badlogic.gdx.audio.Music day_music -> s
+    com.badlogic.gdx.audio.Music lock_music -> t
+    com.badlogic.gdx.graphics.g2d.TextureAtlas mLockAtlas -> u
+    com.badlogic.gdx.graphics.g2d.TextureAtlas mMainAtlas -> v
+    com.badlogic.gdx.graphics.g2d.BitmapFont mFont -> w
+    com.badlogic.gdx.maps.tiled.TiledMap mTileMap -> x
     void setBgMusicListener(ui.story.lemoon.Configer$BgMusicListener) -> a
-ui.story.lemoon.Configer$BgMusicListener -> ui.story.lemoon.c:
+    void loadRes() -> a
+    boolean isLoadFinish() -> b
+    com.badlogic.gdx.audio.Music getNightMusic() -> c
+    com.badlogic.gdx.audio.Music getDayMusic() -> d
+    com.badlogic.gdx.audio.Music getLockMusic() -> e
+    void disposeLockMusic() -> f
+    com.badlogic.gdx.graphics.g2d.TextureAtlas getLockAtlas() -> g
+    void disposeLockAtlas() -> h
+    com.badlogic.gdx.graphics.g2d.TextureAtlas getMainAtlas() -> i
+    com.badlogic.gdx.graphics.g2d.BitmapFont getFont() -> j
+    com.badlogic.gdx.maps.tiled.TiledMap getMap() -> k
+ui.story.lemoon.Configer$BgMusicListener -> ui.story.lemoon.b:
     void toggleMusic(boolean) -> a
+ui.story.lemoon.Configer$GlobalRefreshTask -> ui.story.lemoon.c:
+    void run() -> run
 ui.story.lemoon.MyGame -> ui.story.lemoon.d:
-    ui.story.lemoon.BsuEvent mBEvent -> b
-    com.badlogic.gdx.assets.AssetManager manager -> c
-    void notify(ui.story.lemoon.msg.MyMsg) -> a
+    ui.story.lemoon.comunicate.BsuEvent mBEvent -> b
+    ui.story.lemoon.Configer mCfg -> c
+    com.badlogic.gdx.assets.AssetManager manager -> d
+    void notify(ui.story.lemoon.comunicate.MyMsg) -> a
     void create() -> a
     void pause() -> c
     void resume() -> d
@@ -4943,7 +4964,7 @@ ui.story.lemoon.actor.CartonActor -> ui.story.lemoon.a.a:
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> r
     java.util.Timer mTimer -> s
     void checkShow() -> w
     void addGrowAction() -> x
@@ -4957,61 +4978,80 @@ ui.story.lemoon.actor.CartonActor$MyTask -> ui.story.lemoon.a.c:
     ui.story.lemoon.actor.CartonActor this$0 -> a
     void run() -> run
 ui.story.lemoon.actor.CloudActor1 -> ui.story.lemoon.a.d:
-    ui.story.lemoon.Configer mCfg -> l
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTrDayCloud -> m
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTrNightCloud -> n
-    float mDayW -> o
-    float mDayH -> p
-    float mNightW -> q
-    float mNightH -> r
-    float mNight1Posx -> s
-    float mNight1Posy -> t
-    float mNight2Posx -> u
-    float mNight2Posy -> v
-    int mystep -> w
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTrDayCloud -> l
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTrNightCloud -> m
+    float mDayW -> n
+    float mDayH -> o
+    float mNightW -> p
+    float mNightH -> q
+    float mNight1Posx -> r
+    float mNight1Posy -> s
+    float mNight2Posx -> t
+    float mNight2Posy -> u
+    int mystep -> v
     void reset() -> x
     void computNightPos() -> w
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.FanActor -> ui.story.lemoon.a.e:
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTower -> m
-    float mPosx -> n
-    float mPosy -> o
-    float mW -> p
-    float mH -> q
-    ui.story.lemoon.Configer mCfg -> r
-    float mSpeed -> s
-    boolean mbPressed -> t
-    com.badlogic.gdx.scenes.scene2d.actions.RotateToAction action -> u
-    void act(float) -> a
-    void checkShow() -> w
-    void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.FanActor$1 -> ui.story.lemoon.a.f:
-    ui.story.lemoon.actor.FanActor this$0 -> a
-    boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-    void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
-ui.story.lemoon.actor.GuoXueActor -> ui.story.lemoon.a.g:
+ui.story.lemoon.actor.ExplorerActor -> ui.story.lemoon.a.e:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> r
     java.util.Timer mTimer -> s
     void checkShow() -> w
     void addGrowAction() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.GuoXueActor$1 -> ui.story.lemoon.a.h:
+ui.story.lemoon.actor.ExplorerActor$1 -> ui.story.lemoon.a.f:
+    ui.story.lemoon.actor.ExplorerActor this$0 -> a
+    void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
+    boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
+ui.story.lemoon.actor.ExplorerActor$MyTask -> ui.story.lemoon.a.g:
+    ui.story.lemoon.actor.ExplorerActor this$0 -> a
+    void run() -> run
+ui.story.lemoon.actor.FanActor -> ui.story.lemoon.a.h:
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTower -> m
+    float mPosx -> n
+    float mPosy -> o
+    float mW -> p
+    float mH -> q
+    float mSpeed -> r
+    boolean mbPressed -> s
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> t
+    com.badlogic.gdx.scenes.scene2d.actions.RotateToAction action -> u
+    void act(float) -> a
+    void checkShow() -> w
+    void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
+ui.story.lemoon.actor.FanActor$1 -> ui.story.lemoon.a.i:
+    ui.story.lemoon.actor.FanActor this$0 -> a
+    boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
+    void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
+ui.story.lemoon.actor.GuoXueActor -> ui.story.lemoon.a.j:
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
+    float mPosx -> m
+    float mPosy -> n
+    float mW -> o
+    float mH -> p
+    boolean mbHadGrowed -> q
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
+    void checkShow() -> w
+    void addGrowAction() -> x
+    void act(float) -> a
+    void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
+ui.story.lemoon.actor.GuoXueActor$1 -> ui.story.lemoon.a.k:
     ui.story.lemoon.actor.GuoXueActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.GuoXueActor$MyTask -> ui.story.lemoon.a.i:
+ui.story.lemoon.actor.GuoXueActor$MyTask -> ui.story.lemoon.a.l:
     ui.story.lemoon.actor.GuoXueActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.LandActor -> ui.story.lemoon.a.j:
+ui.story.lemoon.actor.LandActor -> ui.story.lemoon.a.m:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
@@ -5040,24 +5080,23 @@ ui.story.lemoon.actor.LandActor -> ui.story.lemoon.a.j:
     float mPosFlowX -> K
     float mPosFlowY -> L
     float stateTime_Flow -> M
-    ui.story.lemoon.Configer mCfg -> N
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mRotCloud -> O
-    float mPosCloudX -> P
-    float mPosCloudY -> Q
-    java.lang.StringBuffer mTimeStr -> R
-    java.text.SimpleDateFormat formatter -> S
-    java.text.SimpleDateFormat formatter_H -> T
-    java.text.SimpleDateFormat formatter_M -> U
-    java.text.SimpleDateFormat formatter_S -> V
-    float mRotatHour -> W
-    float mRotatMin -> X
-    float mRotatSec -> Y
-    java.util.Date mCurDate -> Z
-    java.util.Timer mTimer -> aa
-    long mLastTm -> ab
-    float angle -> ac
-    float step -> ad
-    boolean bshowcloud -> ae
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mRotCloud -> N
+    float mPosCloudX -> O
+    float mPosCloudY -> P
+    java.lang.StringBuffer mTimeStr -> Q
+    java.text.SimpleDateFormat formatter -> R
+    java.text.SimpleDateFormat formatter_H -> S
+    java.text.SimpleDateFormat formatter_M -> T
+    java.text.SimpleDateFormat formatter_S -> U
+    float mRotatHour -> V
+    float mRotatMin -> W
+    float mRotatSec -> X
+    java.util.Date mCurDate -> Y
+    java.util.Timer mTimer -> Z
+    long mLastTm -> aa
+    float angle -> ab
+    float step -> ac
+    boolean bshowcloud -> ad
     void genTimeInfo() -> w
     void drawTimeRela(com.badlogic.gdx.graphics.g2d.Batch) -> a
     void drawRipple(com.badlogic.gdx.graphics.g2d.Batch) -> b
@@ -5066,104 +5105,103 @@ ui.story.lemoon.actor.LandActor -> ui.story.lemoon.a.j:
     void drawCloud(com.badlogic.gdx.graphics.g2d.Batch) -> d
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.LandActor$1 -> ui.story.lemoon.a.k:
+ui.story.lemoon.actor.LandActor$1 -> ui.story.lemoon.a.n:
     ui.story.lemoon.actor.LandActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.LanguageActor -> ui.story.lemoon.a.l:
+ui.story.lemoon.actor.LanguageActor -> ui.story.lemoon.a.o:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.util.Timer mTimer -> s
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
     void addGrowAction() -> w
     void checkShow() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.LanguageActor$1 -> ui.story.lemoon.a.m:
+ui.story.lemoon.actor.LanguageActor$1 -> ui.story.lemoon.a.p:
     ui.story.lemoon.actor.LanguageActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.LanguageActor$MyTask -> ui.story.lemoon.a.n:
+ui.story.lemoon.actor.LanguageActor$MyTask -> ui.story.lemoon.a.q:
     ui.story.lemoon.actor.LanguageActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.LifeActor -> ui.story.lemoon.a.o:
+ui.story.lemoon.actor.LifeActor -> ui.story.lemoon.a.r:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.util.Timer mTimer -> s
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
     void addGrowAction() -> w
     void checkShow() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.LifeActor$1 -> ui.story.lemoon.a.p:
+ui.story.lemoon.actor.LifeActor$1 -> ui.story.lemoon.a.s:
     ui.story.lemoon.actor.LifeActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.LifeActor$MyTask -> ui.story.lemoon.a.q:
+ui.story.lemoon.actor.LifeActor$MyTask -> ui.story.lemoon.a.t:
     ui.story.lemoon.actor.LifeActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.LocalActor -> ui.story.lemoon.a.r:
+ui.story.lemoon.actor.LocalActor -> ui.story.lemoon.a.u:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.util.Timer mTimer -> s
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
     void addGrowAction() -> w
     void checkShow() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.LocalActor$1 -> ui.story.lemoon.a.s:
+ui.story.lemoon.actor.LocalActor$1 -> ui.story.lemoon.a.v:
     ui.story.lemoon.actor.LocalActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.LocalActor$MyTask -> ui.story.lemoon.a.t:
+ui.story.lemoon.actor.LocalActor$MyTask -> ui.story.lemoon.a.w:
     ui.story.lemoon.actor.LocalActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.LogoActor -> ui.story.lemoon.a.u:
+ui.story.lemoon.actor.LogoActor -> ui.story.lemoon.a.x:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.lang.Runnable mFlip -> s
+    java.lang.Runnable mFlip -> r
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.LogoActor$1 -> ui.story.lemoon.a.v:
+ui.story.lemoon.actor.LogoActor$1 -> ui.story.lemoon.a.y:
     ui.story.lemoon.actor.LogoActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.MathActor -> ui.story.lemoon.a.w:
+ui.story.lemoon.actor.MathActor -> ui.story.lemoon.a.z:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.util.Timer mTimer -> s
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
     void addGrowAction() -> w
     void checkShow() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.MathActor$1 -> ui.story.lemoon.a.x:
+ui.story.lemoon.actor.MathActor$1 -> ui.story.lemoon.a.aa:
     ui.story.lemoon.actor.MathActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.MathActor$MyTask -> ui.story.lemoon.a.y:
+ui.story.lemoon.actor.MathActor$MyTask -> ui.story.lemoon.a.ab:
     ui.story.lemoon.actor.MathActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.MeteorActor -> ui.story.lemoon.a.z:
+ui.story.lemoon.actor.MeteorActor -> ui.story.lemoon.a.ac:
     float mPosx -> l
     float mPosy -> m
     float mAngle -> n
@@ -5173,175 +5211,182 @@ ui.story.lemoon.actor.MeteorActor -> ui.story.lemoon.a.z:
     com.badlogic.gdx.graphics.g2d.Animation mMeteorAnim -> r
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion[] mMeteorFrams -> s
     float mDelayed -> t
-    ui.story.lemoon.Configer mCfg -> u
-    boolean bset -> v
-    float stateTime -> w
+    boolean bset -> u
+    float stateTime -> v
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.MoonActor -> ui.story.lemoon.a.aa:
-    ui.story.lemoon.Configer mCfg -> l
-    com.badlogic.gdx.graphics.g2d.Animation mMoonAnim -> m
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion[] mMoonFrams -> n
-    float mPosMoonX -> o
-    float mPosMoonY -> p
-    float stateTime -> q
-    float stateTime2 -> r
+ui.story.lemoon.actor.MoonActor -> ui.story.lemoon.a.ad:
+    com.badlogic.gdx.graphics.g2d.Animation mMoonAnim -> l
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion[] mMoonFrams -> m
+    float mPosMoonX -> n
+    float mPosMoonY -> o
+    float stateTime -> p
+    float stateTime2 -> q
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
     void checkState() -> w
     void act(float) -> a
     void drawMoon(com.badlogic.gdx.graphics.g2d.Batch) -> a
-ui.story.lemoon.actor.MusicActor -> ui.story.lemoon.a.ab:
+ui.story.lemoon.actor.MusicActor -> ui.story.lemoon.a.ae:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.util.Timer mTimer -> s
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
     void checkShow() -> w
     void addGrowAction() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.MusicActor$1 -> ui.story.lemoon.a.ac:
+ui.story.lemoon.actor.MusicActor$1 -> ui.story.lemoon.a.af:
     ui.story.lemoon.actor.MusicActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.MusicActor$MyTask -> ui.story.lemoon.a.ad:
+ui.story.lemoon.actor.MusicActor$MyTask -> ui.story.lemoon.a.ag:
     ui.story.lemoon.actor.MusicActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.PaintActor -> ui.story.lemoon.a.ae:
+ui.story.lemoon.actor.PaintActor -> ui.story.lemoon.a.ah:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.util.Timer mTimer -> s
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
     void addGrowAction() -> w
     void checkShow() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.PaintActor$1 -> ui.story.lemoon.a.af:
+ui.story.lemoon.actor.PaintActor$1 -> ui.story.lemoon.a.ai:
     ui.story.lemoon.actor.PaintActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.PaintActor$MyTask -> ui.story.lemoon.a.ag:
+ui.story.lemoon.actor.PaintActor$MyTask -> ui.story.lemoon.a.aj:
     ui.story.lemoon.actor.PaintActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.RainBowActor -> ui.story.lemoon.a.ah:
+ui.story.lemoon.actor.RainBowActor -> ui.story.lemoon.a.ak:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mRainbow -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.ScienceActor -> ui.story.lemoon.a.ai:
+ui.story.lemoon.actor.ScienceActor -> ui.story.lemoon.a.al:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.util.Timer mTimer -> s
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
     void addGrowAction() -> w
     void checkShow() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.ScienceActor$1 -> ui.story.lemoon.a.aj:
+ui.story.lemoon.actor.ScienceActor$1 -> ui.story.lemoon.a.am:
     ui.story.lemoon.actor.ScienceActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.ScienceActor$MyTask -> ui.story.lemoon.a.ak:
+ui.story.lemoon.actor.ScienceActor$MyTask -> ui.story.lemoon.a.an:
     ui.story.lemoon.actor.ScienceActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.SettingActor -> ui.story.lemoon.a.al:
+ui.story.lemoon.actor.SettingActor -> ui.story.lemoon.a.ao:
     com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mTextureRegion -> l
     float mPosx -> m
     float mPosy -> n
     float mW -> o
     float mH -> p
     boolean mbHadGrowed -> q
-    ui.story.lemoon.Configer mCfg -> r
-    java.util.Timer mTimer -> s
+    java.util.Timer mTimer -> r
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> s
     void addGrowAction() -> w
     void checkShow() -> x
     void act(float) -> a
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
-ui.story.lemoon.actor.SettingActor$1 -> ui.story.lemoon.a.am:
+ui.story.lemoon.actor.SettingActor$1 -> ui.story.lemoon.a.ap:
     ui.story.lemoon.actor.SettingActor this$0 -> a
     void touchUp(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> b
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.SettingActor$MyTask -> ui.story.lemoon.a.an:
+ui.story.lemoon.actor.SettingActor$MyTask -> ui.story.lemoon.a.aq:
     ui.story.lemoon.actor.SettingActor this$0 -> a
     void run() -> run
-ui.story.lemoon.actor.SpeakerActor -> ui.story.lemoon.a.ao:
-    ui.story.lemoon.Configer mCfg -> l
-    com.badlogic.gdx.graphics.g2d.Animation mSignalAnim -> m
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion[] mSignalFrams -> n
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mSpeakerRegion -> o
-    float mPosSpeakX -> p
-    float mPosSpeakY -> q
-    float mPosSignalX -> r
-    float mPosSignalY -> s
-    float mSpeakW -> t
-    float mSpeakH -> u
-    float mSignalW -> v
-    float mSignalH -> w
+ui.story.lemoon.actor.SpeakerActor -> ui.story.lemoon.a.ar:
+    com.badlogic.gdx.graphics.g2d.Animation mSignalAnim -> l
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion[] mSignalFrams -> m
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mSpeakerRegion -> n
+    float mPosSpeakX -> o
+    float mPosSpeakY -> p
+    float mPosSignalX -> q
+    float mPosSignalY -> r
+    float mSpeakW -> s
+    float mSpeakH -> t
+    float mSignalW -> u
+    float mSignalH -> v
+    com.badlogic.gdx.scenes.scene2d.InputListener input -> w
     float stateTime -> x
     float stateTime2 -> y
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
     void drawSpeak(com.badlogic.gdx.graphics.g2d.Batch) -> a
-ui.story.lemoon.actor.SpeakerActor$1 -> ui.story.lemoon.a.ap:
+ui.story.lemoon.actor.SpeakerActor$1 -> ui.story.lemoon.a.as:
     ui.story.lemoon.actor.SpeakerActor this$0 -> a
     boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent,float,float,int,int) -> a
-ui.story.lemoon.actor.SunActor -> ui.story.lemoon.a.aq:
-    ui.story.lemoon.Configer mCfg -> l
-    com.badlogic.gdx.graphics.g2d.Animation mSunAnim -> m
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion[] mSunFrams -> n
-    float mPosSunX -> o
-    float mPosSunY -> p
-    float stateTime -> q
-    float stateTime2 -> r
-    float lasttime -> s
-    float lastangle -> t
-    float mRadius -> u
-    float mOrgX -> v
-    float mOrgY -> w
-    int lastsec -> x
+ui.story.lemoon.actor.SunActor -> ui.story.lemoon.a.at:
+    com.badlogic.gdx.graphics.g2d.Animation mSunAnim -> l
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion[] mSunFrams -> m
+    float mPosSunX -> n
+    float mPosSunY -> o
+    float stateTime -> p
+    float stateTime2 -> q
+    float lasttime -> r
+    float lastangle -> s
+    float mRadius -> t
+    float mOrgX -> u
+    float mOrgY -> v
+    int lastsec -> w
     void draw(com.badlogic.gdx.graphics.g2d.Batch,float) -> a
     void computePosition() -> w
     void checkState() -> x
     void act(float) -> a
     void drawSun(com.badlogic.gdx.graphics.g2d.Batch) -> a
 ui.story.lemoon.android.AndroidLauncher -> ui.story.lemoon.android.AndroidLauncher:
-    ui.story.lemoon.android.AndroidLauncher$BatteryReceiver batteryReceiver -> q
+    android.os.Handler handler -> v
+    java.lang.Runnable runnable -> w
     ui.story.lemoon.android.NetworkStateReceiver networkStateReceiver -> o
-    boolean mBConnected -> p
+    int EVENT_NEW_ACTIVITY -> p
+    int EVENT_UNKOWN -> q
+    int EVENT_SCREEN_OFF -> r
+    int mEventType -> s
+    ui.story.lemoon.android.AndroidLauncher$MyReceiver myReceiver -> t
+    boolean mBConnected -> u
     void onCreate(android.os.Bundle) -> onCreate
+    void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
     void onPause() -> onPause
     void onResume() -> onResume
     void onStop() -> onStop
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onDestroy() -> onDestroy
 ui.story.lemoon.android.AndroidLauncher$1 -> ui.story.lemoon.android.a:
     ui.story.lemoon.android.AndroidLauncher this$0 -> a
-    void notify(ui.story.lemoon.msg.MyMsg) -> a
-    ui.story.lemoon.android.AndroidLauncher access$0(ui.story.lemoon.android.AndroidLauncher$1) -> a
-ui.story.lemoon.android.AndroidLauncher$1$1 -> ui.story.lemoon.android.b:
-    ui.story.lemoon.android.AndroidLauncher$1 this$1 -> a
     void run() -> run
-ui.story.lemoon.android.AndroidLauncher$BatteryReceiver -> ui.story.lemoon.android.c:
+ui.story.lemoon.android.AndroidLauncher$2 -> ui.story.lemoon.android.b:
+    ui.story.lemoon.android.AndroidLauncher this$0 -> a
+    void notify(ui.story.lemoon.comunicate.MyMsg) -> a
+    ui.story.lemoon.android.AndroidLauncher access$0(ui.story.lemoon.android.AndroidLauncher$2) -> a
+ui.story.lemoon.android.AndroidLauncher$2$1 -> ui.story.lemoon.android.c:
+    ui.story.lemoon.android.AndroidLauncher$2 this$1 -> a
+    void run() -> run
+ui.story.lemoon.android.AndroidLauncher$MyReceiver -> ui.story.lemoon.android.d:
     ui.story.lemoon.android.AndroidLauncher this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-ui.story.lemoon.android.AndroidLauncher$NetworkStatusChangeListener -> ui.story.lemoon.android.d:
+ui.story.lemoon.android.AndroidLauncher$NetworkStatusChangeListener -> ui.story.lemoon.android.e:
     ui.story.lemoon.android.AndroidLauncher this$0 -> a
     void onNetworkInvalid() -> a
     void onNetworkValid() -> b
-ui.story.lemoon.android.NetworkStateReceiver -> ui.story.lemoon.android.e:
+ui.story.lemoon.android.NetworkStateReceiver -> ui.story.lemoon.android.f:
     ui.story.lemoon.android.NetworkStateReceiver$OnNetworkStateChangedListener changedListener -> c
     boolean firstLoad -> a
     long preTime -> d
@@ -5349,34 +5394,36 @@ ui.story.lemoon.android.NetworkStateReceiver -> ui.story.lemoon.android.e:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
     boolean checkNetwork(android.content.Context) -> a
     void setChangedListener(ui.story.lemoon.android.NetworkStateReceiver$OnNetworkStateChangedListener) -> a
-ui.story.lemoon.android.NetworkStateReceiver$OnNetworkStateChangedListener -> ui.story.lemoon.android.f:
+ui.story.lemoon.android.NetworkStateReceiver$OnNetworkStateChangedListener -> ui.story.lemoon.android.g:
     void onNetworkInvalid() -> a
     void onNetworkValid() -> b
-ui.story.lemoon.msg.MyMsg -> ui.story.lemoon.b.a:
+ui.story.lemoon.comunicate.BsuEvent -> ui.story.lemoon.b.a:
+    void notify(ui.story.lemoon.comunicate.MyMsg) -> a
+ui.story.lemoon.comunicate.MyMsg -> ui.story.lemoon.b.b:
     int what -> a
 ui.story.lemoon.scr.v2.SCRLoading -> ui.story.lemoon.c.a.a:
     com.badlogic.gdx.Game game -> a
-    com.badlogic.gdx.graphics.g2d.TextureAtlas textureAtlas -> b
     com.badlogic.gdx.graphics.g2d.SpriteBatch batch -> v
-    com.badlogic.gdx.graphics.g2d.Sprite mHand -> c
-    com.badlogic.gdx.graphics.g2d.Sprite mUnlock -> d
-    com.badlogic.gdx.graphics.g2d.Animation boatAnim -> e
-    com.badlogic.gdx.graphics.OrthographicCamera camera -> f
-    com.badlogic.gdx.graphics.OrthographicCamera cameraUI -> g
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mWave1 -> h
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mWave2 -> i
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mBg -> j
-    com.badlogic.gdx.audio.Music music -> k
-    float W -> l
-    float H -> m
-    float mWave1OffsetX -> n
-    float mWave2OffsetX -> o
-    int mHandStep -> p
-    int mUnlockStep -> q
-    float mUnlockAlpha -> r
-    boolean mbPressed -> s
-    float mboatPos -> t
-    float elapsedTime -> u
+    com.badlogic.gdx.graphics.g2d.Sprite mHand -> b
+    com.badlogic.gdx.graphics.g2d.Sprite mUnlock -> c
+    com.badlogic.gdx.graphics.g2d.Animation boatAnim -> d
+    com.badlogic.gdx.graphics.OrthographicCamera camera -> e
+    com.badlogic.gdx.graphics.OrthographicCamera cameraUI -> f
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mWave1 -> g
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mWave2 -> h
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mBg -> i
+    float W -> j
+    float H -> k
+    ui.story.lemoon.scr.v2.SCRMain srcmain -> l
+    float mWave1OffsetX -> m
+    float mWave2OffsetX -> n
+    int mHandStep -> o
+    int mUnlockStep -> p
+    float mUnlockAlpha -> q
+    boolean mbPressed -> r
+    float mboatPos -> s
+    float elapsedTime -> t
+    long mLastUpTm -> u
     void show() -> a
     void upateWave() -> e
     void updateHand() -> f
@@ -5396,42 +5443,71 @@ ui.story.lemoon.scr.v2.SCRLoading -> ui.story.lemoon.c.a.a:
     boolean scrolled(int) -> c
 ui.story.lemoon.scr.v2.SCRMain -> ui.story.lemoon.c.a.b:
     int mCurPg -> a
-    com.badlogic.gdx.scenes.scene2d.Stage mStage1 -> x
-    com.badlogic.gdx.graphics.OrthographicCamera mCamera -> y
-    com.badlogic.gdx.maps.MapRenderer mMapRenderer -> z
+    com.badlogic.gdx.scenes.scene2d.Stage mStage1 -> Y
+    com.badlogic.gdx.graphics.OrthographicCamera mCamera -> Z
+    com.badlogic.gdx.maps.MapRenderer mMapRenderer -> aa
     com.badlogic.gdx.maps.tiled.TiledMap mMap -> b
     com.badlogic.gdx.utils.viewport.Viewport viewport -> c
-    ui.story.lemoon.Configer mCfg -> d
-    com.badlogic.gdx.InputMultiplexer multiplexer -> e
-    com.badlogic.gdx.input.GestureDetector mGesture -> f
-    com.badlogic.gdx.InputProcessor mInput -> g
-    java.util.HashMap mLayerMap -> h
-    com.badlogic.gdx.graphics.g2d.SpriteBatch batch -> i
-    com.badlogic.gdx.graphics.OrthographicCamera camera -> j
-    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mbottomCloud -> k
-    float mcloudOffsetX -> l
-    float mcloudOffsetY -> m
-    float mCloudW -> n
-    float mCloud2W -> o
-    com.badlogic.gdx.audio.Music night_music -> p
-    com.badlogic.gdx.audio.Music day_music -> q
-    int mMvStepsX -> r
-    int mMvStepsY -> s
-    float mXcnt -> t
-    float mYcnt -> u
-    float mMovePeriod -> v
-    boolean mbfirst -> A
-    float mToDftPeriod -> w
+    com.badlogic.gdx.InputMultiplexer multiplexer -> d
+    com.badlogic.gdx.input.GestureDetector mGesture -> e
+    com.badlogic.gdx.InputProcessor mInput -> f
+    java.util.HashMap mLayerMap -> g
+    com.badlogic.gdx.graphics.g2d.SpriteBatch batch -> h
+    com.badlogic.gdx.graphics.OrthographicCamera camera -> i
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mbottomCloud -> j
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mLeftPt -> k
+    com.badlogic.gdx.graphics.g2d.TextureAtlas$AtlasRegion mRightPt -> l
+    float mcloudOffsetX -> m
+    float mcloudOffsetY -> n
+    float mCloudW -> o
+    float mCloud2W -> p
+    float mLeftPtW -> q
+    float mLeftPtH -> r
+    float mRightPtW -> s
+    float mRightPtH -> t
+    com.badlogic.gdx.audio.Music night_music -> u
+    com.badlogic.gdx.audio.Music day_music -> v
+    com.badlogic.gdx.scenes.scene2d.Group group -> w
+    ui.story.lemoon.actor.MeteorActor metor1 -> x
+    ui.story.lemoon.actor.MeteorActor metor2 -> y
+    ui.story.lemoon.actor.RainBowActor rainBow -> z
+    ui.story.lemoon.actor.LandActor land -> A
+    ui.story.lemoon.actor.ScienceActor science -> B
+    ui.story.lemoon.actor.MathActor math -> C
+    ui.story.lemoon.actor.LocalActor local -> D
+    ui.story.lemoon.actor.FanActor fan -> E
+    ui.story.lemoon.actor.GuoXueActor guoxue -> F
+    ui.story.lemoon.actor.LifeActor life -> G
+    ui.story.lemoon.actor.CartonActor carton -> H
+    ui.story.lemoon.actor.MusicActor music -> I
+    ui.story.lemoon.actor.PaintActor paint -> J
+    ui.story.lemoon.actor.LanguageActor language -> K
+    ui.story.lemoon.actor.SettingActor setting -> L
+    ui.story.lemoon.actor.SunActor sun -> M
+    ui.story.lemoon.actor.CloudActor1 cloud1 -> N
+    ui.story.lemoon.actor.MoonActor moon -> O
+    ui.story.lemoon.actor.LogoActor logo -> P
+    ui.story.lemoon.actor.SpeakerActor speak -> Q
+    ui.story.lemoon.actor.ExplorerActor explorer -> R
+    int mMvStepsX -> S
+    int mMvStepsY -> T
+    float mXcnt -> U
+    float mYcnt -> V
+    float mMovePeriod -> W
+    boolean mbfirst -> ab
+    float mToDftPeriod -> X
     void show() -> a
     void initforcloud() -> e
     void upateCloud() -> f
     void DrawCloud() -> g
-    void initStageItems() -> h
-    void setStage() -> i
-    void initRes() -> j
-    void parserLayer() -> l
-    void handleBg() -> m
-    void stageRender() -> k
+    void initforPt() -> h
+    void drawPt() -> i
+    void initStageItems() -> j
+    void setStage() -> k
+    void initRes() -> l
+    void parserLayer() -> n
+    void handleBg() -> o
+    void stageRender() -> m
     void render(float) -> a
     void resize(int,int) -> b
     void pause() -> b
@@ -5440,13 +5516,15 @@ ui.story.lemoon.scr.v2.SCRMain -> ui.story.lemoon.c.a.b:
     boolean touchDown(float,float,int,int) -> a
     boolean tap(float,float,int,int) -> b
     boolean longPress(float,float) -> a
+    void prevPage() -> p
+    void nextPage() -> q
     boolean fling(float,float,int) -> a
     boolean pan(float,float,float,float) -> a
     boolean panStop(float,float,int,int) -> c
     boolean zoom(float,float) -> b
     boolean pinch(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2) -> a
-    void anim_toDefault() -> n
-    void resetView() -> o
+    void anim_toDefault() -> r
+    void resetView() -> s
 ui.story.lemoon.scr.v2.SCRMain$1 -> ui.story.lemoon.c.a.c:
     ui.story.lemoon.scr.v2.SCRMain this$0 -> a
     void toggleMusic(boolean) -> a
