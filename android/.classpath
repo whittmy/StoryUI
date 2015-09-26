@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="src" path="/StoryUI-core"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.6.2/14e97f2799e74334d15c59ae90c6247f36b90429/gdx-backend-android-1.6.2.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.6.2/bbbcb1241b67d83e54dcb1e17467d3bcef873d4b/gdx-backend-android-1.6.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.2/b4406b97b35d7caf7111400ceebc8b92c8998168/gdx-box2d-1.6.2.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.2/8f89728682848a3a5191d9f5b54ff9d2828a0ca3/gdx-box2d-1.6.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.6.2/62705f896186f9294e37daa0ade876e8692310cf/gdx-freetype-1.6.2.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.6.2/f42fa4fc587adf5db89cdde6a8f1aeb5800be936/gdx-freetype-1.6.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.2/b70b1eb9da71076aa47ac8932b42358b00db84a0/gdx-1.6.2.jar" sourcepath="C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.2/34d15ddf29a3a4b5022e5035d0befe98e90d83ec/gdx-1.6.2-sources.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
