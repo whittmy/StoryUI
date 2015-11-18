@@ -6,6 +6,7 @@ import ui.story.lemoon.Configer;
 import ui.story.lemoon.Configer.BgMusicListener;
 import ui.story.lemoon.MyGame;
 import ui.story.lemoon.actor.*;
+import ui.story.lemoon.comunicate.MyMsg;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -73,21 +74,25 @@ public class SCRMain implements Screen, GestureListener {
 				// TODO Auto-generated method stub
 				if(on){
 					if(MyGame.mCfg.mBDayMode){
+						//night_music.pause();
 						day_music.play();
 					}
 					else{
+						//day_music.pause();
 						night_music.play();
 					}
 					
 				}
 				else{
-					if(MyGame.mCfg.mBDayMode){
-						day_music.pause();
-					}
-					else{
-						night_music.pause();
-					}
+//					if(MyGame.mCfg.mBDayMode){
+//						day_music.pause();
+//					}
+//					else{
+//						night_music.pause();
+//					}
 					
+					day_music.pause();
+					night_music.pause();
 				}
 			}
 		});
@@ -234,53 +239,11 @@ public class SCRMain implements Screen, GestureListener {
 	}
  
 	Group group;
-	MeteorActor metor1, metor2;
-	RainBowActor rainBow;
-	LandActor land;
-	ScienceActor science;
-	MathActor math;
-	LocalActor local;
-	FanActor fan;
-	GuoXueActor guoxue;
-	LifeActor life;
-	CartonActor carton;
-	MusicActor music;
-	PaintActor paint;
-	LanguageActor language;
-	SettingActor setting;
-	SunActor sun;
-	CloudActor1 cloud1;
-	MoonActor moon;
-	LogoActor logo;
-	SpeakerActor speak;
-	ExplorerActor explorer;
+
 	
 	void initStageItems(){
 		if(mStage1 != null)
 			return ;
-
-		metor1 = new MeteorActor(MyGame.mCfg, 26f,19f, 30f, 0f);
-		metor2 = new MeteorActor(MyGame.mCfg, 35f,22f, 30f, 2f);
-		rainBow = new RainBowActor(MyGame.mCfg);
-		land = new LandActor(MyGame.mCfg);
-		science = new ScienceActor(MyGame.mCfg);
-		math = new MathActor(MyGame.mCfg);
-		local = new LocalActor(MyGame.mCfg);
-		fan = new FanActor(MyGame.mCfg);
-		guoxue = new GuoXueActor(MyGame.mCfg);
-		life = new LifeActor(MyGame.mCfg);
-		carton = new CartonActor(MyGame.mCfg);
-		music = new MusicActor(MyGame.mCfg);
-		paint = new PaintActor(MyGame.mCfg);
-		language = new LanguageActor(MyGame.mCfg);
-		setting = new SettingActor(MyGame.mCfg);	
-		explorer = new ExplorerActor(MyGame.mCfg);
-		
-        sun = new SunActor(MyGame.mCfg);
-        cloud1 = new CloudActor1(MyGame.mCfg); 		
-        moon = new MoonActor(MyGame.mCfg);
-		logo = new LogoActor(MyGame.mCfg);
-        speak = new SpeakerActor(MyGame.mCfg);    
 
 		mCamera = new OrthographicCamera(MyGame.mCfg.MAP_WIDTH, MyGame.mCfg.MAP_HEIGHT);
 		mCamera.position.set((MyGame.mCfg.MAP_WIDTH) / 2f+1, MyGame.mCfg.MAP_HEIGHT / 2f-1, 0); 
@@ -290,39 +253,51 @@ public class SCRMain implements Screen, GestureListener {
 
 		viewport = new StretchViewport(MyGame.mCfg.MAP_WIDTH, MyGame.mCfg.MAP_HEIGHT, mCamera);
 		mStage1 = new Stage(viewport);
-		mStage1.addActor(metor1);
-		mStage1.addActor(metor2);
-		mStage1.addActor(rainBow);
+		mStage1.addActor(new MeteorActor(MyGame.mCfg, 26f,19f, 30f, 0f));
+		mStage1.addActor(new MeteorActor(MyGame.mCfg, 35f,22f, 30f, 2f));
+		mStage1.addActor(new RainBowActor(MyGame.mCfg));
 		
 		//注意添加顺序，有层级关系
 		group = new Group();
-		group.addActor(land);
-		group.addActor(science);
-		group.addActor(math);
-		group.addActor(local);
-		group.addActor(fan);
-        group.addActor(guoxue);
-        group.addActor(life);        
-        group.addActor(carton);
-        group.addActor(music);
-        group.addActor(paint);        
-        group.addActor(language);
-        group.addActor(setting);     
-        group.addActor(explorer); 
+		group.addActor(new LandActor(MyGame.mCfg));
+		
+
+		group.addActor(new GenItemActor(MyGame.mCfg, 23f, 13.9f, "item_science", MyMsg.ITEM_SCIENCE,1)); //能力拓展
+		group.addActor(new GenItemActor(MyGame.mCfg, 16f, 11.3f, "item_math", MyMsg.ITEM_MATHS,1));	//数理思维
+        group.addActor(new GenItemActor(MyGame.mCfg, 28.8f, 13.5f, "item_draw", MyMsg.ITEM_PAINT, 1));     // 涂鸦   
+
+		
+        group.addActor(new GenItemActor(MyGame.mCfg, 23f , 13.8f, "item_carton", MyMsg.ITEM_CARTON, 0)); //故事天地
+        
+        group.addActor(new GenItemActor(MyGame.mCfg, 27.5f, 12.2f, "item_endraw", MyMsg.ITEM_ENDRAW, 0));	//童言童语
+
+		group.addActor(new FanActor(MyGame.mCfg));
+		
+        group.addActor(new GenItemActor(MyGame.mCfg, /*30.2f, 8.4f,*/31.5f,9.7f, "item_guoxue" ,  MyMsg.ITEM_GUOXUE, 0));	//国学教育
+        group.addActor(new GenItemActor(MyGame.mCfg,   20.1f,9.5f, "item_music", MyMsg.ITEM_MUSIC, 0));	// 儿歌音乐
+        
+        
+        group.addActor(new GenItemActor(MyGame.mCfg,  21.5f, 8.5f, "item_life", MyMsg.ITEM_LIFE,1));        //生活百科
+        group.addActor(new GenItemActor(MyGame.mCfg, 32f, 8.4f, "item_language", MyMsg.ITEM_LANGUAGE, 1)); //语言发展
+ 
+        
+        group.addActor(new GenItemActor(MyGame.mCfg, 30.8f, 9.8f, "item_setting", MyMsg.ITEM_SETTING, 2));     // 设置
+		group.addActor(new GenItemActor(MyGame.mCfg, 19.3f, 10f, "item_local", MyMsg.ITEM_LOCAL, 2));	//本地媒体
+        group.addActor(new GenItemActor(MyGame.mCfg, 25.0f, 14.0f, "item_explorer", MyMsg.ITEM_EXPLORER, 2));  // 文件浏览
         
         //岛上下摆动
 //        SequenceAction ac_float = Actions.sequence(Actions.moveBy(0, -1, 1.5f), Actions.moveBy(0, 1, 1.5f));
 //        group.addAction(Actions.forever(ac_float));
         
         //太阳
-        mStage1.addActor(sun);
-        mStage1.addActor(cloud1);
+        mStage1.addActor(new SunActor(MyGame.mCfg));
+        mStage1.addActor(new CloudActor1(MyGame.mCfg));
 
         //moon
-        mStage1.addActor(moon);
+        mStage1.addActor(new MoonActor(MyGame.mCfg));
 		mStage1.addActor(group);  
-        mStage1.addActor(logo);
-        mStage1.addActor(speak);
+        mStage1.addActor(new LogoActor(MyGame.mCfg));
+        mStage1.addActor(new SpeakerActor(MyGame.mCfg));
 		
 		
 		mStage1.setActionsRequestRendering(false);

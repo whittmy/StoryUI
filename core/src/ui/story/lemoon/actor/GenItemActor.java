@@ -1,11 +1,11 @@
 package ui.story.lemoon.actor;
 
+import java.awt.Point;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import ui.story.lemoon.Configer;
 import ui.story.lemoon.MyGame;
-import ui.story.lemoon.actor.LifeActor.MyTask;
 import ui.story.lemoon.comunicate.MyMsg;
 
 import com.badlogic.gdx.Gdx;
@@ -17,21 +17,26 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
-public class ExplorerActor extends Actor{
-	//22.5,16.9=>22.5, 32-16.9-1=14.1
+public class GenItemActor extends Actor{
 	AtlasRegion mTextureRegion;
-	float mPosx=22.5f, mPosy=14.1f;
+	float mPosx, mPosy;
 	float mW,mH;
 	boolean mbHadGrowed = false;
-	
+	int mMsg, mPgIdx;
 	InputListener input;
 	
 	Timer mTimer = null;
-	public ExplorerActor(Configer cfg){
+	public GenItemActor(Configer cfg, 
+			float x, float y, 
+			String resRegion, //such as "item_carton"
+			int msg, int pageIdx){  // such as MyMsg.ITEM_CARTON
 		super();
-	//	
+		mPosx = x;
+		mPosy = y;
+		mMsg = msg;
+		mPgIdx = pageIdx;
 		
-		mTextureRegion = MyGame.mCfg.getMainAtlas().findRegion("item_explorer");
+		mTextureRegion = MyGame.mCfg.getMainAtlas().findRegion(resRegion);
 		mW = mTextureRegion.getRegionWidth()/32f;
 		mH = mTextureRegion.getRegionHeight()/32f;
 		setSize(mW, mH);
@@ -44,13 +49,18 @@ public class ExplorerActor extends Actor{
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				// TODO Auto-generated method stub
 				//Configer.mylog("", "Carton up x="+x+", y="+y);
+//				MyMsg msg = new MyMsg();
+//				msg.what = MyMsg.ITEM_CARTON;
+//				MyGame.mCfg.game.notify(msg);
+				//return super.touchDown(event, x, y, pointer, button);
+				//return true;
 			}
  
 			
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				// TODO Auto-generated method stub
-				Configer.mylog("", "Explorer down x="+x+", y="+y);
+				Configer.mylog("", "Carton down x="+x+", y="+y);
 				 
 				if(mTimer != null){
 					mTimer.cancel();
@@ -77,7 +87,7 @@ public class ExplorerActor extends Actor{
 			Configer.mylog("", "intval="+intval);
 			if( intval>=400){
 				MyMsg msg = new MyMsg();
-				msg.what = MyMsg.ITEM_EXPLORER;
+				msg.what = mMsg;
 				MyGame.mCfg.game.notify(msg);
 				Configer.mylog("", "actor touched activate");
 			}
@@ -87,7 +97,7 @@ public class ExplorerActor extends Actor{
 	}
 	
 	void checkShow(){
-		if(MyGame.mCfg.mCurPage == 2){
+		if(MyGame.mCfg.mCurPage == mPgIdx){
 			setVisible(true);
 			if(!mbHadGrowed){
 				addGrowAction();

@@ -6,100 +6,100 @@ filter: Nearest,Nearest
 repeat: none
 bottom_cloud
   rotate: false
-  xy: 2, 456
+  xy: 420, 456
   size: 563, 116
   orig: 563, 116
   offset: 0, 0
   index: -1
 day_rainbow
   rotate: false
-  xy: 2, 230
+  xy: 2, 348
   size: 416, 224
   orig: 416, 224
   offset: 0, 0
   index: -1
-flow1
+fan
   rotate: false
-  xy: 650, 2
-  size: 96, 64
-  orig: 96, 64
+  xy: 869, 34
+  size: 96, 96
+  orig: 96, 96
   offset: 0, 0
   index: -1
-flow2
+flow1
   rotate: false
-  xy: 748, 2
+  xy: 596, 20
   size: 96, 64
   orig: 96, 64
   offset: 0, 0
   index: -1
 hour
   rotate: false
-  xy: 567, 508
+  xy: 985, 508
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: -1
 item_carton
   rotate: false
-  xy: 260, 68
-  size: 225, 160
-  orig: 225, 160
+  xy: 707, 3
+  size: 160, 121
+  orig: 160, 121
   offset: 0, 0
   index: -1
 item_draw
   rotate: false
-  xy: 487, 68
-  size: 192, 160
-  orig: 192, 160
+  xy: 348, 68
+  size: 194, 148
+  orig: 194, 148
   offset: 0, 0
   index: -1
-item_explorer
+item_endraw
   rotate: false
-  xy: 808, 421
-  size: 212, 151
-  orig: 212, 151
-  offset: 0, 0
-  index: -1
-item_guoxue
-  rotate: false
-  xy: 614, 250
-  size: 192, 128
-  orig: 192, 128
+  xy: 544, 126
+  size: 178, 158
+  orig: 178, 158
   offset: 0, 0
   index: -1
 item_language
   rotate: false
-  xy: 2, 36
-  size: 256, 192
-  orig: 256, 192
+  xy: 420, 286
+  size: 215, 168
+  orig: 215, 168
   offset: 0, 0
   index: -1
 item_life
   rotate: false
-  xy: 614, 380
-  size: 192, 192
-  orig: 192, 192
+  xy: 2, 167
+  size: 170, 179
+  orig: 170, 179
   offset: 0, 0
   index: -1
 item_local
   rotate: false
-  xy: 420, 230
-  size: 192, 224
-  orig: 192, 224
-  offset: 0, 0
-  index: -1
-item_music
-  rotate: false
-  xy: 808, 259
-  size: 160, 160
-  orig: 160, 160
+  xy: 174, 175
+  size: 172, 171
+  orig: 172, 171
   offset: 0, 0
   index: -1
 item_science
   rotate: false
-  xy: 681, 88
-  size: 160, 160
-  orig: 160, 160
+  xy: 886, 155
+  size: 136, 137
+  orig: 136, 137
+  offset: 0, 0
+  index: -1
+item_setting
+  rotate: false
+  xy: 174, 2
+  size: 160, 171
+  orig: 160, 171
+  offset: 0, 0
+  index: -1
+item_tower
+  rotate: false
+  xy: 348, 218
+  size: 64, 128
+  orig: 64, 128
   offset: 0, 0
   index: -1
 land
@@ -109,58 +109,58 @@ land
   orig: 992, 448
   offset: 0, 0
   index: -1
+left_tap
+  rotate: false
+  xy: 961, 388
+  size: 60, 66
+  orig: 60, 66
+  offset: 0, 0
+  index: -1
 meteor1
   rotate: false
-  xy: 681, 68
+  xy: 544, 106
   size: 161, 18
   orig: 161, 18
   offset: 0, 0
   index: -1
 meteor2
   rotate: false
-  xy: 2, 16
+  xy: 544, 86
   size: 161, 18
   orig: 161, 18
   offset: 0, 0
   index: -1
-min
-  rotate: false
-  xy: 165, 2
-  size: 64, 32
-  orig: 64, 32
-  offset: 0, 0
-  index: -1
-mlogo
-  rotate: false
-  xy: 846, 15
-  size: 154, 80
-  orig: 154, 80
-  offset: 0, 0
-  index: -1
 night_moon
   rotate: false
-  xy: 843, 97
+  xy: 2, 5
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
+right_tap
+  rotate: false
+  xy: 961, 320
+  size: 60, 66
+  orig: 60, 66
+  offset: 0, 0
+  index: -1
 ripple1
   rotate: false
-  xy: 260, 2
+  xy: 414, 220
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 ripple2
   rotate: false
-  xy: 390, 2
+  xy: 336, 2
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 ripple3
   rotate: false
-  xy: 520, 2
+  xy: 466, 2
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
@@ -174,174 +174,181 @@ signal0
   index: -1
 signal1
   rotate: false
-  xy: 970, 378
+  xy: 996, 938
   size: 21, 41
   orig: 21, 41
   offset: 0, 0
   index: -1
 signal2
   rotate: false
-  xy: 567, 465
+  xy: 996, 895
   size: 21, 41
   orig: 21, 41
   offset: 0, 0
   index: -1
 signal3
   rotate: false
-  xy: 996, 938
+  xy: 996, 852
   size: 21, 41
   orig: 21, 41
   offset: 0, 0
   index: -1
 star
   rotate: false
-  xy: 614, 242
+  xy: 996, 844
   size: 6, 6
   orig: 6, 6
   offset: 0, 0
   index: -1
-
-items2.png
-size: 1024,512
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-clock
-  rotate: false
-  xy: 2, 264
-  size: 96, 224
-  orig: 96, 224
-  offset: 0, 0
-  index: -1
-day_cloud
-  rotate: false
-  xy: 439, 250
-  size: 117, 76
-  orig: 117, 76
-  offset: 0, 0
-  index: -1
-fan
-  rotate: false
-  xy: 2, 166
-  size: 96, 96
-  orig: 96, 96
-  offset: 0, 0
-  index: -1
-flow3
-  rotate: false
-  xy: 100, 132
-  size: 96, 64
-  orig: 96, 64
-  offset: 0, 0
-  index: -1
-flow4
-  rotate: false
-  xy: 558, 262
-  size: 96, 64
-  orig: 96, 64
-  offset: 0, 0
-  index: -1
-flow5
-  rotate: false
-  xy: 2, 2
-  size: 96, 64
-  orig: 96, 64
-  offset: 0, 0
-  index: -1
-item_math
-  rotate: false
-  xy: 100, 198
-  size: 175, 128
-  orig: 175, 128
-  offset: 0, 0
-  index: -1
-item_setting
-  rotate: false
-  xy: 277, 198
-  size: 160, 128
-  orig: 160, 128
-  offset: 0, 0
-  index: -1
-item_tower
-  rotate: false
-  xy: 910, 360
-  size: 64, 128
-  orig: 64, 128
-  offset: 0, 0
-  index: -1
-left_tap
-  rotate: false
-  xy: 198, 130
-  size: 60, 66
-  orig: 60, 66
-  offset: 0, 0
-  index: -1
-night_cloud
-  rotate: false
-  xy: 100, 66
-  size: 96, 64
-  orig: 96, 64
-  offset: 0, 0
-  index: -1
-night_cloud1
-  rotate: false
-  xy: 2, 68
-  size: 96, 96
-  orig: 96, 96
-  offset: 0, 0
-  index: -1
-right_tap
-  rotate: false
-  xy: 260, 130
-  size: 60, 66
-  orig: 60, 66
-  offset: 0, 0
-  index: -1
-second
-  rotate: false
-  xy: 439, 216
-  size: 64, 32
-  orig: 64, 32
-  offset: 0, 0
-  index: -1
-specker
-  rotate: false
-  xy: 656, 273
-  size: 56, 53
-  orig: 56, 53
-  offset: 0, 0
-  index: -1
 sun1
   rotate: false
-  xy: 100, 328
+  xy: 637, 294
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 sun2
   rotate: false
-  xy: 262, 328
+  xy: 724, 132
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 sun3
   rotate: false
-  xy: 424, 328
+  xy: 799, 294
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
+
+items2.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+clock
+  rotate: false
+  xy: 2, 30
+  size: 96, 224
+  orig: 96, 224
+  offset: 0, 0
+  index: -1
+day_cloud
+  rotate: false
+  xy: 256, 16
+  size: 117, 76
+  orig: 117, 76
+  offset: 0, 0
+  index: -1
+flow2
+  rotate: false
+  xy: 908, 92
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
+flow3
+  rotate: false
+  xy: 424, 65
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
+flow4
+  rotate: false
+  xy: 712, 49
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
+flow5
+  rotate: false
+  xy: 810, 49
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
+item_explorer
+  rotate: false
+  xy: 595, 2
+  size: 115, 134
+  orig: 115, 134
+  offset: 0, 0
+  index: -1
+item_guoxue
+  rotate: false
+  xy: 424, 131
+  size: 169, 123
+  orig: 169, 123
+  offset: 0, 0
+  index: -1
+item_math
+  rotate: false
+  xy: 595, 138
+  size: 159, 116
+  orig: 159, 116
+  offset: 0, 0
+  index: -1
+item_music
+  rotate: false
+  xy: 756, 115
+  size: 150, 139
+  orig: 150, 139
+  offset: 0, 0
+  index: -1
+min
+  rotate: false
+  xy: 712, 15
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+mlogo
+  rotate: false
+  xy: 100, 12
+  size: 154, 80
+  orig: 154, 80
+  offset: 0, 0
+  index: -1
+night_cloud
+  rotate: false
+  xy: 908, 26
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
+night_cloud1
+  rotate: false
+  xy: 908, 158
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+second
+  rotate: false
+  xy: 778, 15
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+specker
+  rotate: false
+  xy: 522, 76
+  size: 56, 53
+  orig: 56, 53
+  offset: 0, 0
+  index: -1
 sun4
   rotate: false
-  xy: 586, 328
+  xy: 100, 94
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 sun5
   rotate: false
-  xy: 748, 328
+  xy: 262, 94
   size: 160, 160
   orig: 160, 160
   offset: 0, 0

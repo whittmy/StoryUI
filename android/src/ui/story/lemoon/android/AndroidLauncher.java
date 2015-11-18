@@ -253,6 +253,14 @@ public class AndroidLauncher extends AndroidApplication {
 						it.setComponent(com);
 						startActivity(it);
 						break;
+					case MyMsg.ITEM_ENDRAW:
+						System.out.println("ENDRAW");
+						it = new Intent();
+						com = new ComponentName("com.lingshi.kids",
+								"com.lingshi.kids.activity.SplashActivity");
+						it.setComponent(com);
+						startActivity(it);
+						break;
 					default:
 						mEventType = EVENT_UNKOWN;
 						break;

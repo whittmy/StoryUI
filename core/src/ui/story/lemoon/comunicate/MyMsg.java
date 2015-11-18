@@ -16,5 +16,6 @@ public class MyMsg {
 	static public final int ITEM_LOCAL = 9  ;
 	static public final int ITEM_SETTING = 10 ;
 	static public final int ITEM_EXPLORER = 11;
+	static public final int ITEM_ENDRAW = 12;
 	
 }
